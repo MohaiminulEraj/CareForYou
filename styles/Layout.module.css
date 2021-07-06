@@ -1,0 +1,24 @@
+.container {
+    /* margin: 130px auto;
+    max-width: 1960px;
+    padding: 0 30px; */
+    min-height: 100vh;
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.title,
+.description {
+    text-align: center;
+}
+
+
+.description {
+    margin-top: 160px;
+    line-height: 1.5;
+    font-size: 1.5rem;
+}
