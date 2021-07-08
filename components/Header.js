@@ -6,20 +6,50 @@ export default function Header() {
     return (
         <header className={styles.header}>
             <div className={styles.logo}>
-                <Link href='/'>
+                {/* <Link href='/'>
                     <a>CARE FOR YOU</a>
+                </Link> */}
+                <Link href='/articles/add'>
+                    <a>
+                        CREATE NEW ARTICLE
+                    </a>
+                </Link>
+                <Link href='/'>
+                    <a>
+                        SUPPORT
+                    </a>
+                </Link>
+                <Link href='/'>
+                    <a>
+                        REVIEW
+                    </a>
                 </Link>
             </div>
 
-            <navbar className="navbar navbar-expand-md">
-                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li className="nav-item">
+            <nav className="navbar navbar-expand-md">
+
+                <ul className="navbar-nav mr-auto">
+                    {/*  <li className="nav-item">
                         <Link href='/articles/add'>
                             <a className="nav-link">
                                 CREATE NEW ARTICLE
                             </a>
                         </Link>
                     </li>
+                    <li className="nav-item">
+                        <Link href='/'>
+                            <a className="nav-link">
+                                SUPPORT
+                            </a>
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link href='/'>
+                            <a className="nav-link">
+                                REVIEW
+                            </a>
+                        </Link>
+                    </li> */}
                     <li className="nav-item">
                         <Link href='/account/register'>
                             <a className="nav-link">
@@ -35,6 +65,7 @@ export default function Header() {
                         </Link>
                     </li>
                 </ul>
+
                 {/* <button
                     className="navbar-toggler"
                     type="button"
@@ -74,7 +105,7 @@ export default function Header() {
                         <Link href='/'>Sign Up</Link>
                     </li>
                 </ul> */}
-            </navbar>
-        </header>
+            </nav>
+        </header >
     )
 }

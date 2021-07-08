@@ -26,14 +26,14 @@
 }
 
 .logo {
-    color: red;
+    /* color: red; */
     font-size: 20px;
     text-transform: uppercase;
 }
 
-.logo a {
+/* .logo a {
     color: red;
-}
+} */
 
 @media (max-width: 768px) {
     .header {
