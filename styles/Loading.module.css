@@ -8,8 +8,8 @@
 .lds_dual_ring:after {
     content: " ";
     display: block;
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     margin: 1px;
     border-radius: 50%;
     border: 5px solid #cef;

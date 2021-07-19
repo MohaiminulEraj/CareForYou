@@ -48,7 +48,7 @@ const Login = () => {
 
             </form>
             <p className="mt-2">
-                Don't have an account? <Link href="/account/register">Register</Link>
+                Don`t have an account? <Link href="/account/register">Register</Link>
             </p>
         </div>
     )
