@@ -1,35 +1,47 @@
-import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa'
+import { FaSignInAlt, FaSignOutAlt, FaHome } from 'react-icons/fa'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import Link from 'next/link'
 import styles from '@/styles/Header.module.css'
 
 export default function Header() {
+    const checkLogin = () => {
+        toast.error('User needs to have a varified account to create an article');
+    }
     return (
-        <header className={styles.header}>
-            <div className={styles.logo}>
-                {/* <Link href='/'>
+        <>
+            <ToastContainer />
+            <header className={styles.header}>
+                <div className={styles.logo}>
+                    {/* <Link href='/'>
                     <a>CARE FOR YOU</a>
                 </Link> */}
-                <Link href='/articles/add'>
-                    <a>
-                        CREATE NEW ARTICLE
-                    </a>
-                </Link>
-                <Link href='/'>
-                    <a>
-                        SUPPORT
-                    </a>
-                </Link>
-                <Link href='/'>
-                    <a>
-                        REVIEW
-                    </a>
-                </Link>
-            </div>
+                    <Link href='/'>
+                        <a>
+                            <FaHome />
+                        </a>
+                    </Link>
+                    <Link href='/articles/add'>
+                        <a onClick={checkLogin}>
+                            CREATE NEW ARTICLE
+                        </a>
+                    </Link>
+                    <Link href='/'>
+                        <a>
+                            SUPPORT
+                        </a>
+                    </Link>
+                    <Link href='/'>
+                        <a>
+                            REVIEW
+                        </a>
+                    </Link>
+                </div>
 
-            <nav className="navbar navbar-expand-md">
+                <nav className="navbar navbar-expand-md">
 
-                <ul className="navbar-nav mr-auto">
-                    {/*  <li className="nav-item">
+                    <ul className="navbar-nav mr-auto">
+                        {/*  <li className="nav-item">
                         <Link href='/articles/add'>
                             <a className="nav-link">
                                 CREATE NEW ARTICLE
@@ -50,23 +62,23 @@ export default function Header() {
                             </a>
                         </Link>
                     </li> */}
-                    <li className="nav-item">
-                        <Link href='/account/register'>
-                            <a className="nav-link">
-                                REGISTER
-                            </a>
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link href='/account/login'>
-                            <a className="nav-link btn-secondary btn-icon">
-                                <FaSignInAlt /> LOGIN
-                            </a>
-                        </Link>
-                    </li>
-                </ul>
+                        <li className="nav-item">
+                            <Link href='/account/register'>
+                                <a className="nav-link">
+                                    REGISTER
+                                </a>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link href='/account/login'>
+                                <a style={{ color: 'whitesmoke' }} className="nav-link btn-dark btn-icon">
+                                    <FaSignInAlt /> LOGIN
+                                </a>
+                            </Link>
+                        </li>
+                    </ul>
 
-                {/* <button
+                    {/* <button
                     className="navbar-toggler"
                     type="button"
                     data-toggle="collapse"
@@ -90,7 +102,7 @@ export default function Header() {
                     </ul>
                 </div> */}
 
-                {/* <ul>
+                    {/* <ul>
                     <li>
                         <Link href='/'>Create an Article</Link>
                     </li>
@@ -105,7 +117,8 @@ export default function Header() {
                         <Link href='/'>Sign Up</Link>
                     </li>
                 </ul> */}
-            </nav>
-        </header >
+                </nav>
+            </header >
+        </>
     )
 }

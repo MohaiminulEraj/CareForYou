@@ -26,6 +26,12 @@
     font-size: 17px;
 }
 
+.auth button[type='submit'] {
+    margin-top: 20px;
+    width: 100%;
+    font-size: 17px;
+}
+
 .auth div {
     margin-bottom: 20px;
 }

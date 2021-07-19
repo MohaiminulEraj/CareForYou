@@ -108,8 +108,11 @@ export default function AddArticlePage() {
                         <input type="text" id="refLink" name="refLink" value={values.refLink} onChange={handleInputChange} placeholder="Reference Link (if any)" />
                     </div>
                 </div>
+                <div style={{ marginTop: '6px' }}>
+                    <input type="button" value="Save as Draft" className='btn-secondary' />
+                </div>
                 <div>
-                    <input type="submit" value="Create Article" className='btn-danger' />
+                    <input type="submit" value="Submit For Review" className='btn-danger' />
                 </div>
             </form>
         </Layout>

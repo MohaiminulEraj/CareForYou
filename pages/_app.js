@@ -1,5 +1,7 @@
 import Head from "next/head";
-import '../styles/globals.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '@/styles/globals.css'
+import { wrapper } from '../redux/store'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -16,4 +18,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+export default wrapper.withRedux(MyApp)

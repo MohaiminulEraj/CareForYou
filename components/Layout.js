@@ -12,7 +12,7 @@ export default function Layout({ title, description, keywords, children }) {
                 <meta name='keywords' content={keywords} />
             </Head>
             <Header />
-            <div className="container-fluid">
+            <div className="container-fluid mt-4">
                 {children}
             </div>
         </div>
@@ -22,5 +22,5 @@ export default function Layout({ title, description, keywords, children }) {
 Layout.defaultProps = {
     title: 'Care For You',
     description: 'A website that provides verified articles to stop fake news from spreading and a platform where patients can set appointments and talk to specialists to diagnose their health problems.',
-    keywords: 'health, care, online medication'
+    keywords: 'health, care, online medication, care for you'
 }
