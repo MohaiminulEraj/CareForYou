@@ -4,7 +4,7 @@ import { signIn } from 'next-auth/client'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Link from 'next/link'
-import ButtonLoader from '../ButtonLoader'
+import ButtonLoader from '../layout/ButtonLoader'
 import styles from '@/styles/AuthForm.module.css'
 
 const Login = () => {

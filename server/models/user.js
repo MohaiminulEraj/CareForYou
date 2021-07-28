@@ -31,13 +31,13 @@ const UserSchema = new Schema({
     avatar: {
         public_id: {
             type: String,
-            required: true,
-            default: 'public_id'
+            // required: true,
+            // default: 'public_id'
         },
         url: {
             type: String,
-            required: true,
-            default: '/images/default_avatar.jpg'
+            // required: true,
+            // default: '/images/default_avatar.jpg'
         }
     },
     role: {
@@ -105,6 +105,16 @@ const UserSchema = new Schema({
         required: true,
         default: '(Seperated By Comma)'
     },
+    credentials: [
+        {
+            public_id: {
+                type: String,
+            },
+            url: {
+                type: String,
+            }
+        }
+    ],
     articles: [
         {
             type: Schema.Types.ObjectId,

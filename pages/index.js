@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@/styles/Layout.module.css'
-import Layout from '@/components/Layout'
+import Layout from '@/components/layout/Layout'
 import Search from '@/components/Search'
 import { API_URL } from '@/config/index'
 import { FaSearch } from 'react-icons/fa'

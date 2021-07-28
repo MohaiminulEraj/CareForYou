@@ -1,6 +1,8 @@
-import Layout from '@/components/Layout'
+import Layout from '@/components/layout/Layout'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { getSession } from 'next-auth/client'
+import ButtonLoader from '@/components/layout/ButtonLoader'
 import Link from 'next/link'
 import styles from '@/styles/Form.module.css'
 
@@ -36,7 +38,7 @@ export default function AddArticlePage() {
     }
     return (
         <Layout title='Create New Article'>
-            <Link href='/'>Go Back</Link>
+            {/* <Link href='/'>Go Back</Link> */}
             <h1>Add Article</h1>
             <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.grid}>
@@ -51,7 +53,7 @@ export default function AddArticlePage() {
                     </div>
                     <div className={styles.grid}>
                         <div className={styles.files}>
-                            <input type="file" />
+                            <input type="file" multiple />
                         </div>
                         <div>
                             <textarea type="text" id="causes" name="causes" value={values.causes} onChange={handleInputChange} placeholder="Enter Causes"></textarea>
@@ -62,7 +64,7 @@ export default function AddArticlePage() {
                     </div>
                     <div className={styles.grid}>
                         <div className={styles.files}>
-                            <input type="file" />
+                            <input type="file" multiple />
                         </div>
                         <div>
                             <textarea type="text" id="consequences" name="consequences" value={values.consequences} onChange={handleInputChange} placeholder="Enter consequences"></textarea>
@@ -73,7 +75,7 @@ export default function AddArticlePage() {
                     </div>
                     <div className={styles.grid}>
                         <div className={styles.files}>
-                            <input type="file" />
+                            <input type="file" multiple />
                         </div>
                         <div>
                             <textarea type="text" id="faq" name="faq" value={values.faq} onChange={handleInputChange} placeholder="Frequently asked questions and answers"></textarea>
@@ -108,13 +110,29 @@ export default function AddArticlePage() {
                         <input type="text" id="refLink" name="refLink" value={values.refLink} onChange={handleInputChange} placeholder="Reference Link (if any)" />
                     </div>
                 </div>
-                <div style={{ marginTop: '6px' }}>
+                {/* <div style={{ marginTop: '6px' }}>
                     <input type="button" value="Save as Draft" className='btn-secondary' />
-                </div>
+                </div> */}
                 <div>
-                    <input type="submit" value="Submit For Review" className='btn-danger' />
+                    {/* <button type="submit" style={{ width: '100%' }} className="btn btn-danger" disabled={updateLoading ? true : false} >{updateLoading ? <ButtonLoader /> : 'SUBMIT FOR REVIEW'} </button> */}
+                    <input type="submit" value="SUBMIT FOR REVIEW" className='btn-danger' />
                 </div>
             </form>
         </Layout>
     )
+}
+
+export async function getServerSideProps(context) {
+    const session = await getSession({ req: context.req });
+    if (!session) {
+        return {
+            redirect: {
+                destination: "/account/login",
+                permanent: false
+            }
+        }
+    }
+    return {
+        props: { session }
+    }
 }

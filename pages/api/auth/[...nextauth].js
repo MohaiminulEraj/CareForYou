@@ -5,8 +5,9 @@ import dbConnect from '@/config/dbConnect'
 
 export default NextAuth({
     session: {
-        jwt: true,
-        maxAge: 7 * 24 * 60 * 60
+        jwt: {
+            signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
+        }
     },
     providers: [
         Providers.Credentials({
@@ -20,10 +21,13 @@ export default NextAuth({
                 }
                 //Find user in the database
                 const user = await User.findOne({ email }).select('+password');
+                if (!user) {
+                    throw new Error('Invalid Email or Password')
+                }
                 const isPasswordMatched = await user.comparePassword(password);
 
-                if (!user || !isPasswordMatched) {
-                    throw new Error('Invalid Email or Password!');
+                if (!isPasswordMatched) {
+                    throw new Error('Invalid Email or Password')
                 }
                 return Promise.resolve(user);
             }
@@ -34,7 +38,7 @@ export default NextAuth({
             user && (token.user = user)
             return Promise.resolve(token)
         },
-        session: async (session, token) => {
+        session: async (session, user) => {
             session.user = user.user
             return Promise.resolve(session)
         }

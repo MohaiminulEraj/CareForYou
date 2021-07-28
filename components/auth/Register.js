@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { FaUser } from 'react-icons/fa'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import ButtonLoader from '../ButtonLoader'
+import ButtonLoader from '../layout/ButtonLoader'
 import styles from '@/styles/AuthForm.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser, clearErrors } from '@/redux/actions/userActions'
@@ -48,8 +48,6 @@ const Register = () => {
         // setLoading(true);
         if (password !== passwordConfirm) {
             toast.error('Password do not match!')
-            console.log(password)
-            console.log(passwordConfirm)
             return;
         }
         const userData = {

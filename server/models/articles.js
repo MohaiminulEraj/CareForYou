@@ -32,7 +32,7 @@ const ArticleSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    file1: [
+    file2: [
         {
             public_id: {
                 type: String,
@@ -50,7 +50,7 @@ const ArticleSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    file1: [
+    file3: [
         {
             public_id: {
                 type: String,
@@ -125,6 +125,11 @@ const ArticleSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,
+    },
+    visibility: {
+        type: String,
+        enum: ["public", "private", "protected"],
+        default: "public"
     },
     createdAt: {
         type: Date,

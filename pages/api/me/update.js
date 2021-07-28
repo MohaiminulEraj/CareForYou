@@ -1,11 +1,13 @@
 import nc from 'next-connect'
 import dbConnect from '@/config/dbConnect'
-import { allArticles, newArticle } from '@/server/controllers/articleController'
+import { updateProfile } from '@/server/controllers/authController'
 import { isAuthenticatedUser } from '@/server/middlewares/auth'
 import onError from '@/server/middlewares/errors'
 const handler = nc({ onError });
 dbConnect();
-handler.use(isAuthenticatedUser).get(allArticles);
-handler.use(isAuthenticatedUser).post(newArticle);
+handler
+    .use(isAuthenticatedUser)
+    .put(updateProfile)
+
 
 export default handler;
