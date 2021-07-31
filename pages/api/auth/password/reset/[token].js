@@ -1,12 +1,14 @@
 import nc from 'next-connect'
 import dbConnect from '@/config/dbConnect'
-import { registerUser } from '@/server/controllers/authControllers'
+
+import { resetPassword } from '@/server/controllers/authControllers'
+
 import onError from '@/server/middlewares/errors'
 
 const handler = nc({ onError });
 
 dbConnect();
 
-handler.post(registerUser);
+handler.put(resetPassword)
 
 export default handler;

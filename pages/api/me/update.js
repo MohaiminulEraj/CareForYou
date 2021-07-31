@@ -1,6 +1,6 @@
 import nc from 'next-connect'
 import dbConnect from '@/config/dbConnect'
-import { updateProfile } from '@/server/controllers/authController'
+import { updateProfile } from '@/server/controllers/authControllers'
 import { isAuthenticatedUser } from '@/server/middlewares/auth'
 import onError from '@/server/middlewares/errors'
 const handler = nc({ onError });

@@ -1,6 +1,6 @@
 import nc from 'next-connect'
 import dbConnect from '@/config/dbConnect'
-import { currentUserProfile } from '@/server/controllers/authController'
+import { currentUserProfile } from '@/server/controllers/authControllers'
 import { isAuthenticatedUser } from '@/server/middlewares/auth'
 import onError from '@/server/middlewares/errors'
 

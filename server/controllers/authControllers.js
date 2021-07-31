@@ -103,14 +103,14 @@ const forgotPassword = catchAsyncErrors(async (req, res, next) => {
     const { origin } = absoluteUrl(req)
 
     // Create reset password url
-    const resetUrl = `${origin}/password/reset/${resetToken}`
+    const resetUrl = `${origin}/account/password/reset/${resetToken}`
 
     const message = `Your password reset url is as follow: \n\n ${resetUrl} \n\n\ If you have not requested this email, then ignore it.`
 
     try {
         await sendEmail({
             email: user.email,
-            subject: 'Care For You Password Recovery',
+            subject: 'CARE FOR YOU - Password Recovery',
             message
         })
 

@@ -126,7 +126,7 @@ export const forgotPassword = (email) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post('/api/password/forgot', email, config)
+        const { data } = await axios.post('/api/auth/password/forgot', email, config)
 
         dispatch({
             type: FORGOT_PASSWORD_SUCCESS,
@@ -155,7 +155,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.put(`/api/password/reset/${token}`, passwords, config)
+        const { data } = await axios.put(`/api/auth/password/reset/${token}`, passwords, config)
 
         dispatch({
             type: RESET_PASSWORD_SUCCESS,

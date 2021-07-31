@@ -11,7 +11,7 @@ import { UPDATE_PROFILE_RESET } from '@/redux/constants/userConstants'
 import Link from 'next/link'
 // import Image from 'next/image'
 
-const Profile = () => {
+const EditProfile = () => {
     const dispatch = useDispatch()
     const router = useRouter()
     const [user, setUser] = useState({
@@ -36,6 +36,7 @@ const Profile = () => {
     const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg');
     const { user: loadedUser, loading } = useSelector(state => state.loadedUser)
     const { error, isUpdated, loading: updateLoading } = useSelector(state => state.user)
+    const [passwordConfirm, setPasswordConfirm] = useState('');
 
     useEffect(() => {
 
@@ -68,14 +69,14 @@ const Profile = () => {
 
     }, [dispatch, isUpdated, error, loadedUser])
 
-    const [passwordConfirm, setPasswordConfirm] = useState('');
 
     const handleSubmit = e => {
         e.preventDefault();
-        // setLoading(true);
+
         const userData = {
-            fullname, email, password, dateofbirth, gender, city, country, zip, phone, license_no, university, dept_doc, reference_no
+            fullname, email, password, avatar, dateofbirth, gender, city, country, zip, phone, license_no, university, dept_doc, reference_no
         }
+
         dispatch(updateProfile(userData))
     }
 
@@ -161,9 +162,13 @@ const Profile = () => {
                     </div>
                     <div className="row mb-3">
                         <div className="col">
-                            <label htmlFor="lName">Gender: </label>
-                            <input id="lName" type="text" className="form-control" placeholder="Gender" name="gender"
-                                onChange={onChange} value={gender !== 'Gender' ? gender : ''} />
+                            <label htmlFor="gender">Gender: </label>
+                            <select value={gender} onChange={onChange} className="form-control" name="gender" id="gender">
+                                <option value="Gender" disabled></option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
                         </div>
                         <div className="col">
                             <label htmlFor="dob">Date Of Birth:</label>
@@ -194,7 +199,7 @@ const Profile = () => {
                                 onChange={onChange} value={phone} />
                         </div>
                     </div>
-
+                    <h6>Please Fill up rest of the fields if you are a Doctor:</h6>
                     <div className="row mb-3">
                         <div className="col">
                             <label htmlFor="lcNo">License No:</label>
@@ -204,61 +209,32 @@ const Profile = () => {
                         <div className="col">
                             <label htmlFor="uni">Graduating University:</label>
                             <input id="uni" type="text" className="form-control" name="university" placeholder="Graduating University"
-                                onChange={onChange} value={university === 'Uni ' ? university : ''} />
+                                onChange={onChange} value={university !== 'Uni' ? university : ''} />
                         </div>
                     </div>
                     <div className="row mb-3">
                         <div className="col">
                             <label htmlFor="refNo">Reference ID:</label>
-                            <input id="refNo" type="text" className="form-control" placeholder="Separated by comma" name="reference_no"
-                                onChange={onChange} value={reference_no === '(Seperated By Comma)' ? reference_no : ''}
+                            <input id="refNo" type="text" className="form-control" placeholder="Applicable if you want to register as a doctor" name="reference_no"
+                                onChange={onChange} value={reference_no[0] !== '(Separated by comma)' ? reference_no : ''}
                             />
                         </div>
                         <div className="col">
-                            <label htmlFor="dept_doc">Department:</label>
+                            <label htmlFor="dept_doc">Medical Department:</label>
                             <input id="dept_doc" type="text" className="form-control" name="dept_doc"
                                 onChange={onChange} value={dept_doc !== 'dept' ? dept_doc : ''} />
                         </div>
                         <div className="col">
-                            <label htmlFor="fileUpload">Credentials:</label>
+                            <label htmlFor="fileUpload">Credentials/Certificates:</label>
                             <input id="fileUpload" name="credential" type="file" className="form-control" multiple />
                         </div>
                     </div>
 
                     <button type="submit" style={{ width: '100%' }} className="btn btn-danger" disabled={updateLoading ? true : false} >{updateLoading ? <ButtonLoader /> : 'UPDATE'} </button>
                 </form>
-                // <div className={styles.auth}>
-                //     <h1>
-                //         <FaUser /> Register
-                //     </h1>
-                //     <ToastContainer />
-                //     <form onSubmit={handleSubmit}>
-                //         <div>
-                //             <label htmlFor="fullname" >Full name</label>
-                //             <input type="text" id="fullname" name="fullname" value={fullname} onChange={onChange} />
-                //         </div>
-                //         <div>
-                //             <label htmlFor="username" >Username</label>
-                //             <input type="text" id="username" name="username" value={username} onChange={onChange} />
-                //         </div>
-                //         <div>
-                //             <label htmlFor="email" >Email Address</label>
-                //             <input type="email" id="email" name="email" value={email} onChange={onChange} />
-                //         </div>
-                //         <div>
-                //             <label htmlFor="password">Password</label>
-                //             <input type="password" id="password" name="password" value={password} onChange={onChange} />
-                //         </div>
-                //         <div>
-                //             <label htmlFor="passwordConfirm" > Confirm Password</label>
-                //             <input type="password" id="passwordConfirm" value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} />
-                //         </div>
-                //         <button type="submit" className="btn btn-danger btn-block" disabled={updateLoading ? true : false} >{updateLoading ? <ButtonLoader /> : 'UPDATE'} </button>
-                //     </form>
-                // </div>
             }
         </>
     )
 }
 
-export default Profile
+export default EditProfile

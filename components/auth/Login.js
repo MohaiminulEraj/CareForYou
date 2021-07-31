@@ -43,7 +43,7 @@ const Login = () => {
                     <label htmlFor="password" >Password</label>
                     <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
-                <a href="#" className="float-right mb-4">Forgot Password?</a>
+                <Link href="/account/password/forgot" className="float-right mb-4">Forgot Password?</Link>
                 <button type="submit" className="btn btn-danger" disabled={loading ? true : false}>{loading ? <ButtonLoader /> : 'Login'} </button>
 
             </form>

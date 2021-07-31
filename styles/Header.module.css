@@ -34,6 +34,9 @@
 /* .logo a {
     color: red;
 } */
+.dropdown_menu {
+    position: relative !important
+}
 
 @media (min-width: 992px) {
     .dropdown_menu .dropdown-toggle:after {
@@ -46,10 +49,11 @@
     .dropdown_menu .dropdown_menu {
         margin-left: 0;
         margin-right: 0;
+        position: relative !important
     }
 
     .dropdown_menu li {
-        position: relative;
+        position: relative !important;
     }
 
     .nav-item .submenu {

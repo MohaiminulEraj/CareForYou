@@ -1,12 +1,12 @@
 import React from 'react'
-import EditProfile from '@/components/user/EditProfile'
+import MyProfile from '@/components/user/MyProfile'
 import Layout from '@/components/layout/Layout'
 import { getSession } from 'next-auth/client'
 
-const updateProfilePage = () => {
+const myProfilePage = () => {
     return (
-        <Layout title="Update Profile">
-            <EditProfile />
+        <Layout title="My Profile">
+            <MyProfile />
         </Layout>
     )
 }
@@ -26,4 +26,4 @@ export async function getServerSideProps(context) {
     }
 }
 
-export default updateProfilePage
+export default myProfilePage
