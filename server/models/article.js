@@ -125,7 +125,7 @@ const ArticleSchema = new Schema({
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        // required: true,
+        required: true,
     },
     visibility: {
         type: String,

@@ -70,7 +70,7 @@ const newArticle = catchAsyncErrors(async (req, res) => {
         req.body.remedies_file = remedies_fileLinks;
     }
     req.body.author = req.user._id
-
+    req.user.articles = req.body._id
     const article = await Article.create(req.body);
     console.log(article);
 

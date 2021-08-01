@@ -26,22 +26,22 @@ const ProfileNavbar = () => {
                             <FaHome />
                         </a>
                     </Link> */}
-                    <Link href='#'>
+                    <Link href='/me/publications'>
                         <a>
                             PUBLICATIONS
                         </a>
                     </Link>
-                    <Link href='#'>
+                    <Link href='/me/diagnosticReports'>
                         <a>
                             DIAGNOSTIC REPORTS
                         </a>
                     </Link>
-                    <Link href='#'>
+                    <Link href='/me/prescriptions'>
                         <a>
                             PRESCRIPTION
                         </a>
                     </Link>
-                    <Link href='#'>
+                    <Link href='/me/consultant'>
                         <a>
                             CONSULTANT
                         </a>
