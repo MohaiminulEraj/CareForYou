@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux'
-import { allArticlesReducer } from './articlesReducers'
+import { allArticlesReducer, newArticleReducer } from './articleReducers'
 import { authReducer, userReducer, loadedUserReducer, forgotPasswordReducer } from './userReducers'
 
 const reducer = combineReducers({
     allArticles: allArticlesReducer,
+    newArticle: newArticleReducer,
     auth: authReducer,
     user: userReducer,
     loadedUser: loadedUserReducer,

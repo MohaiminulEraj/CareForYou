@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const ArticleSchema = new mongoose.Schema({
+const ArticleSchema = new Schema({
     title: {
         type: String,
         required: [true, 'Please enter a title'],
@@ -14,7 +15,7 @@ const ArticleSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please enter article description']
     },
-    file1: [
+    description_file: [
         {
             public_id: {
                 type: String,
@@ -32,7 +33,7 @@ const ArticleSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    file2: [
+    stages_file: [
         {
             public_id: {
                 type: String,
@@ -46,11 +47,11 @@ const ArticleSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    remedies: {
+    remediesAndTreatments: {
         type: String,
         required: true
     },
-    file3: [
+    remedies_file: [
         {
             public_id: {
                 type: String,
@@ -60,7 +61,7 @@ const ArticleSchema = new mongoose.Schema({
             }
         }
     ],
-    question: {
+    faq: {
         type: String,
         required: true
     },
@@ -106,30 +107,30 @@ const ArticleSchema = new mongoose.Schema({
             user: {
                 type: mongoose.Schema.ObjectId,
                 ref: 'User',
-                required: true
+                // required: true
             },
             name: {
                 type: String,
-                required: true
+                // required: true
             },
             rating: {
                 type: Number,
             },
             comment: {
                 type: String,
-                required: true
+                // required: true
             }
         }
     ],
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: true,
+        // required: true,
     },
     visibility: {
         type: String,
         enum: ["public", "private", "protected"],
-        default: "public"
+        default: "private"
     },
     createdAt: {
         type: Date,
@@ -139,7 +140,7 @@ const ArticleSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 
-const Article = mongoose.model('Article', ArticleSchema);
+// const Article = mongoose.model('Article', ArticleSchema);
+// module.exports = Article;
 
-export default mongoose.model.Article || mongoose.model('Article', ArticleSchema);
-module.exports = Article;
+export default mongoose.models.Article || mongoose.model('Article', ArticleSchema);
