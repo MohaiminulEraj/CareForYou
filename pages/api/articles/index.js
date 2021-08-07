@@ -5,7 +5,7 @@ import { isAuthenticatedUser } from '@/server/middlewares/auth'
 import onError from '@/server/middlewares/errors'
 const handler = nc({ onError });
 dbConnect();
-handler.use(isAuthenticatedUser).get(allArticles);
+handler.get(allArticles);
 handler.use(isAuthenticatedUser).post(newArticle);
 
 export default handler;

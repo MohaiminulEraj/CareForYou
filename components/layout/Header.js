@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { FaSignInAlt, FaSignOutAlt, FaHome } from 'react-icons/fa'
+import { FaSignInAlt, FaSignOutAlt, FaHome, FaBell } from 'react-icons/fa'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Link from 'next/link'
@@ -36,7 +36,7 @@ const Header = () => {
                             <FaHome />
                         </a>
                     </Link>
-                    {user ? (
+                    {user && user.role !== 'admin' ? (
                         <Link href='/articles/add'>
                             <a>
                                 CREATE NEW ARTICLE
@@ -49,7 +49,8 @@ const Header = () => {
                             </a>
                         </Link>
                     )}
-                    {/* <Link href='/'>
+
+                    <Link href='/'>
                         <a>
                             SUPPORT
                         </a>
@@ -58,8 +59,10 @@ const Header = () => {
                         <a>
                             REVIEW
                         </a>
-                    </Link> */}
+                    </Link>
                 </div>
+
+
 
                 <nav className="navbar navbar-expand-md">
                     {user ? (
@@ -67,13 +70,33 @@ const Header = () => {
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item">
                                     <Link href='/me'>
-                                        <a
-                                            className="nav-link cursor-pointer justify-content-evenly">
+                                        {/* <a
+                                            className="nav-link cursor-pointer justify-content-evenly"> */}
+                                        <a className={styles.logo}>
                                             <img width="45" height="45" style={{ marginRight: 8, border: "1px solid black" }} src={user.avatar ? user.avatar.url : "/images/default_avatar.jpg"} alt={user && user.name} className="rounded-circle" />
                                             {user && user.fullname.toUpperCase()}
                                         </a>
                                     </Link>
                                 </li>
+                                {user && user.role == 'user' && (
+                                    <li className="nav-item">
+                                        <Link href='/me'>
+                                            <a className={styles.logo}>
+                                                <FaBell />
+                                            </a>
+                                        </Link>
+                                    </li>)
+                                }
+                                {user && user.role == 'admin' && (
+
+                                    <li className="nav-item">
+                                        <Link href='/admin/users'>
+                                            <a>
+                                                USERS
+                                            </a>
+                                        </Link>
+                                    </li>
+                                )}
                                 <li className="nav-item">
                                     <Link href='/'>
                                         <a style={{ color: 'whitesmoke' }} className="nav-link btn-dark btn-icon" onClick={logoutHandler}>

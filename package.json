@@ -13,6 +13,7 @@
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.0.0-beta3",
     "cloudinary": "^1.26.2",
+    "mdbreact": "^5.1.0",
     "mongoose": "^5.13.2",
     "next": "11.0.1",
     "next-absolute-url": "^1.2.2",

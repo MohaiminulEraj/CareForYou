@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { FaSignInAlt, FaSignOutAlt, FaHome } from 'react-icons/fa'
+import { FaSignInAlt, FaSignOutAlt, FaHome, FaBell } from 'react-icons/fa'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Link from 'next/link'
@@ -21,11 +21,11 @@ const ProfileNavbar = () => {
         <>
             <header className={styles.header}>
                 <div className={styles.logo}>
-                    {/* <Link href='/'>
+                    <Link href='/me/'>
                         <a>
                             <FaHome />
                         </a>
-                    </Link> */}
+                    </Link>
                     <Link href='/me/publications'>
                         <a>
                             PUBLICATIONS
@@ -47,7 +47,7 @@ const ProfileNavbar = () => {
                         </a>
                     </Link>
                 </div>
-            </header >
+            </header>
         </>
 
     )

@@ -1,17 +1,23 @@
+import User from '../models/user'
 import Article from '../models/article'
 import catchAsyncErrors from '../middlewares/catchAsyncErrors'
 import cloudinary from 'cloudinary'
 
 import ErrorHandler from '../utils/errorHandler'
-const allArticles = (req, res) => {
+
+// GET - all articles=> /api/articles
+const allArticles = catchAsyncErrors(async (req, res) => {
+    const articles = await Article.find({ visibility: "private" });
     res.status(200).json({
         success: true,
+        articles,
         message: 'All Articles'
     });
-}
+})
 
-// Create a new article => /api/articles
+// POST - Create a new article => /api/articles
 const newArticle = catchAsyncErrors(async (req, res) => {
+
     const description_file = req.body.description_file;
     if (description_file) {
         let description_fileLinks = [];
@@ -19,7 +25,7 @@ const newArticle = catchAsyncErrors(async (req, res) => {
         for (let i = 0; i < description_file.length; i++) {
 
             const result = await cloudinary.v2.uploader.upload(description_file[i], {
-                folder: 'bookit/articles/description_file',
+                folder: 'careforyou/articles/description_file',
             });
 
             description_fileLinks.push({
@@ -38,7 +44,7 @@ const newArticle = catchAsyncErrors(async (req, res) => {
         for (let i = 0; i < stages_file.length; i++) {
 
             const result = await cloudinary.v2.uploader.upload(stages_file[i], {
-                folder: 'bookit/articles/stages_file',
+                folder: 'careforyou/articles/stages_file',
             });
 
             stages_fileLinks.push({
@@ -58,7 +64,7 @@ const newArticle = catchAsyncErrors(async (req, res) => {
         for (let i = 0; i < remedies_file.length; i++) {
 
             const result = await cloudinary.v2.uploader.upload(remedies_file[i], {
-                folder: 'bookit/articles/remedies_file',
+                folder: 'careforyou/articles/remedies_file',
             });
 
             remedies_fileLinks.push({
@@ -70,11 +76,24 @@ const newArticle = catchAsyncErrors(async (req, res) => {
         req.body.remedies_file = remedies_fileLinks;
     }
     req.body.author = req.user._id
-    req.user.articles = req.body._id
+    req.body.diagnosis = req.body.diagnosis.split(',');
+    req.body.symptoms = req.body.symptoms.split(',');
+    for (var i = 0; i < req.body.diagnosis.length; i++) {
+        req.body.diagnosis[i] = req.body.diagnosis[i].trim();
+    }
+    for (var i = 0; i < req.body.symptoms.length; i++) {
+        req.body.symptoms[i] = req.body.symptoms[i].trim();
+    }
     const article = await Article.create(req.body);
-    console.log(article);
-
-    console.log(req.user._id)
+    const user = await User.findById(req.user._id).populate({
+        path: 'articles',
+        select: 'title department'
+    }).sort({ "createdAt": -1 }).populate({
+        path: 'author',
+        select: 'username'
+    });
+    user.articles.push(article)
+    await user.save();
     res.status(200).json({
         success: true,
         article,

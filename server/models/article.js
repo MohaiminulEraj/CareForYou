@@ -79,14 +79,17 @@ const ArticleSchema = new Schema({
     },
     diagnosis: {
         type: [String],
+        trim: true,
         required: true
     },
     symptoms: {
         type: [String],
+        trim: true,
         required: true
     },
     docId: {
         type: [String],
+        trim: true,
         required: true
     },
     refLink: {

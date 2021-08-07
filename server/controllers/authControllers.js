@@ -170,10 +170,10 @@ const resetPassword = catchAsyncErrors(async (req, res, next) => {
 const allAdminUsers = catchAsyncErrors(async (req, res) => {
 
     const users = await User.find();
-
     res.status(200).json({
         success: true,
-        users
+        users,
+        message: 'All Users'
     })
 
 })
@@ -200,9 +200,19 @@ const getUserDetails = catchAsyncErrors(async (req, res) => {
 const updateUser = catchAsyncErrors(async (req, res) => {
 
     const newUserData = {
-        name: req.body.name,
+        fullname: req.body.fullname,
         email: req.body.email,
         role: req.body.role,
+        dateofbirth: req.body.dateofbirth,
+        gender: req.body.gender,
+        city: req.body.city,
+        country: req.body.country,
+        zip: req.body.zip,
+        phone: req.body.phone,
+        license_no: req.body.license_no,
+        university: req.body.university,
+        dept_doc: req.body.dept_doc,
+        reference_no: req.body.reference_no,
     }
 
     const user = await User.findByIdAndUpdate(req.query.id, newUserData, {
@@ -229,7 +239,7 @@ const deleteUser = catchAsyncErrors(async (req, res) => {
 
     // Remove avatar 
     const image_id = user.avatar.public_id;
-    await cloudinary.v2.uploader.destroy(image_id)
+    if (image_id) await cloudinary.v2.uploader.destroy(image_id)
 
 
     await user.remove();
