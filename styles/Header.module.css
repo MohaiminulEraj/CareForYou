@@ -11,7 +11,7 @@
 
 .header a {
     color: #333;
-    margin-right: 20px;
+    margin-right: 15px;
 }
 
 .header a:hover {
@@ -28,7 +28,7 @@
 .logo {
     /* color: red; */
     font-size: 20px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 /* .logo a {

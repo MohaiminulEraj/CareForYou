@@ -46,7 +46,7 @@ const AddNewArticle = () => {
         }
 
         if (success) {
-            router.push('/me')
+            router.push('/me/publications/pending-articles')
             dispatch({ type: NEW_ARTICLE_RESET })
         }
 

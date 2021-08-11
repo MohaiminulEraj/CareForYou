@@ -1,6 +1,7 @@
 import axios from 'axios';
 import absoluteUrl from 'next-absolute-url'
 import {
+    ALL_ARTICLES_REQUEST,
     ALL_ARTICLES_SUCCESS,
     ALL_ARTICLES_FAIL,
 
@@ -8,17 +9,28 @@ import {
     NEW_ARTICLE_SUCCESS,
     NEW_ARTICLE_FAIL,
 
+    UPDATE_ARTICLE_REQUEST,
+    UPDATE_ARTICLE_SUCCESS,
+    UPDATE_ARTICLE_FAIL,
+
+    DELETE_ARTICLE_REQUEST,
+    DELETE_ARTICLE_SUCCESS,
+    DELETE_ARTICLE_FAIL,
+
     CLEAR_ERRORS
 } from '../constants/articleConstants'
 
 //Get all articles
-export const getArticles = (req) => async (dispatch) => {
+export const getArticles = () => async (dispatch) => {
     try {
-        const { origin } = absoluteUrl(req);
-        const { data } = await axios.get(`${origin}/api/articles`)
+        dispatch({ type: ALL_ARTICLES_REQUEST });
+        // const { origin } = absoluteUrl(req);
+        // const { data } = await axios.get(`${origin}/api/articles`)
+        const { data } = await axios.get(`/api/articles`)
+
         dispatch({
             type: ALL_ARTICLES_SUCCESS,
-            payload: data,
+            payload: data.articles,
         })
     } catch (error) {
         dispatch({
@@ -27,6 +39,36 @@ export const getArticles = (req) => async (dispatch) => {
         })
     }
 }
+
+// Get article details
+export const getArticleDetails = (req, id) => async (dispatch) => {
+    try {
+
+        const { origin } = absoluteUrl(req);
+
+        let url;
+
+        if (req) {
+            url = `${origin}/api/articles/${id}`
+        } else {
+            url = `/api/articles/${id}`
+        }
+
+        const { data } = await axios.get(url)
+
+        dispatch({
+            type: ARTICLE_DETAILS_SUCCESS,
+            payload: data.article
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ARTICLE_DETAILS_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
 
 export const newArticle = (articleData) => async (dispatch) => {
     try {
@@ -52,6 +94,56 @@ export const newArticle = (articleData) => async (dispatch) => {
         })
     }
 }
+
+export const updateArticle = (id, articleData) => async (dispatch) => {
+    try {
+
+        dispatch({ type: UPDATE_ARTICLE_REQUEST });
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const { data } = await axios.put(`/api/articles/${id}`, articleData, config)
+
+        dispatch({
+            type: UPDATE_ARTICLE_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (error) {
+
+        dispatch({
+            type: UPDATE_ARTICLE_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+
+export const deleteArticle = (id) => async (dispatch) => {
+    try {
+
+        dispatch({ type: DELETE_ARTICLE_REQUEST });
+
+        const { data } = await axios.delete(`/api/articles/${id}`)
+
+        dispatch({
+            type: DELETE_ARTICLE_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (error) {
+
+        dispatch({
+            type: DELETE_ARTICLE_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
 // Clear Errors
 export const clearErrors = () => async (dispatch) => {
     dispatch({

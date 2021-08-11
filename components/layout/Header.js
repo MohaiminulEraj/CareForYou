@@ -7,7 +7,7 @@ import styles from '@/styles/Header.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from '@/redux/actions/userActions'
 import { signOut } from 'next-auth/client'
-import { Nav, Button } from 'react-bootstrap'
+import { Nav, NavDropdown, Button } from 'react-bootstrap'
 
 const Header = () => {
     const checkLogin = () => {
@@ -71,14 +71,24 @@ const Header = () => {
                                 <li className="nav-item">
                                     <Link href='/me'>
                                         {/* <a
-                                            className="nav-link cursor-pointer justify-content-evenly"> */}
+                                            className="nav-link dropdown-toggle cursor-pointer justify-content-evenly"
+                                            id="navbarDropdownMenuLink"
+                                            role="button"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false"
+                                        > */}
                                         <a className={styles.logo}>
                                             <img width="45" height="45" style={{ marginRight: 8, border: "1px solid black" }} src={user.avatar ? user.avatar.url : "/images/default_avatar.jpg"} alt={user && user.name} className="rounded-circle" />
                                             {user && user.fullname.toUpperCase()}
                                         </a>
+                                        {/* <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a className="dropdown-item" href="#">Action</a></li>
+                                        <li><a className="dropdown-item" href="#">Another action</a></li>
+                                        <li><a className="dropdown-item" href="#">Something else here</a></li>
+                                    </ul> */}
                                     </Link>
                                 </li>
-                                {user && user.role == 'user' && (
+                                {user && user.role == 'doctor' && (
                                     <li className="nav-item">
                                         <Link href='/me'>
                                             <a className={styles.logo}>
