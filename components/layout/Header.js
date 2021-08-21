@@ -69,7 +69,7 @@ const Header = () => {
                         <div className="ml-4 dropdown d-line">
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item">
-                                    <Link href='/me'>
+                                    <Link href={user && user.role === 'user' ? '/me/publications/pending-articles' : '/me'}>
                                         {/* <a
                                             className="nav-link dropdown-toggle cursor-pointer justify-content-evenly"
                                             id="navbarDropdownMenuLink"
@@ -88,7 +88,7 @@ const Header = () => {
                                     </ul> */}
                                     </Link>
                                 </li>
-                                {user && user.role == 'doctor' && (
+                                {/* {user && user.role == 'doctor' && (
                                     <li className="nav-item">
                                         <Link href='/me'>
                                             <a className={styles.logo}>
@@ -96,7 +96,7 @@ const Header = () => {
                                             </a>
                                         </Link>
                                     </li>)
-                                }
+                                } */}
                                 {user && user.role == 'admin' && (
 
                                     <li className="nav-item">

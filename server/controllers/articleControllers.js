@@ -2,12 +2,13 @@ import User from '../models/user'
 import Article from '../models/article'
 import catchAsyncErrors from '../middlewares/catchAsyncErrors'
 import cloudinary from 'cloudinary'
-
+import APIFeatures from '../utils/apiFeatures'
 import ErrorHandler from '../utils/errorHandler'
+
 
 // GET - all articles=> /api/articles
 const allArticles = catchAsyncErrors(async (req, res) => {
-    const articles = await Article.find({ visibility: "private" });
+    const articles = await Article.find({});
     res.status(200).json({
         success: true,
         articles,
@@ -109,7 +110,7 @@ const newArticle = catchAsyncErrors(async (req, res, next) => {
 const getSingleArticle = catchAsyncErrors(async (req, res, next) => {
 
     const article = await Article.findById(req.query.id);
-
+    // console.log(article)
     if (!article) {
         return next(new ErrorHandler('Article not found with this ID', 404))
     }
@@ -130,7 +131,8 @@ const updateArticle = catchAsyncErrors(async (req, res) => {
         return next(new ErrorHandler('Article not found with this ID', 404))
     }
 
-    if (req.body.description_file) {
+    const description_file = req.body.description_file;
+    if (description_file) {
 
         // Delete description file associated with the article
         for (let i = 0; i < article.description_file.length; i++) {
@@ -153,7 +155,8 @@ const updateArticle = catchAsyncErrors(async (req, res) => {
         req.body.description_file = description_fileLinks;
     }
 
-    if (req.body.stages_file) {
+    const stages_file = req.body.stages_file;
+    if (stages_file) {
 
         // Delete stages file associated with the article
         for (let i = 0; i < article.stages_file.length; i++) {
@@ -175,8 +178,8 @@ const updateArticle = catchAsyncErrors(async (req, res) => {
         }
         req.body.stages_file = stages_fileLinks;
     }
-
-    if (req.body.remedies_file) {
+    const remedies_file = req.body.remedies_file;
+    if (remedies_file) {
 
         // Delete remedies file associated with the article
         for (let i = 0; i < article.remedies_file.length; i++) {
@@ -199,6 +202,18 @@ const updateArticle = catchAsyncErrors(async (req, res) => {
         req.body.remedies_file = remedies_fileLinks;
     }
 
+    // if (req.body.diagnosis) {
+    //     req.body.diagnosis = req.body.diagnosis.split(',');
+    //     for (var i = 0; i < req.body.diagnosis.length; i++) {
+    //         req.body.diagnosis[i] = req.body.diagnosis[i].trim();
+    //     }
+    // }
+    // if (req.body.symptoms) {
+    //     req.body.symptoms = req.body.symptoms.split(',');
+    //     for (var i = 0; i < req.body.symptoms.length; i++) {
+    //         req.body.symptoms[i] = req.body.symptoms[i].trim();
+    //     }
+    // }
     article = await Article.findByIdAndUpdate(req.query.id, req.body, {
         new: true,
         runValidators: true,
@@ -259,11 +274,59 @@ const deleteArticle = catchAsyncErrors(async (req, res) => {
 
 })
 
+// Create a new review   =>   /api/reviews
+const createArticleReview = catchAsyncErrors(async (req, res) => {
+
+    const { comment, visibility, articleId } = req.body;
+    // console.log(articleId);
+    const review = {
+        user: req.user._id,
+        name: req.user.name,
+        comment
+    }
+
+    const article = await Article.findById(articleId);
+
+    // const isReviewed = article.reviews.find(
+    //     r => r.user.toString() === req.user._id.toString()
+    // )
+
+    // if (isReviewed) {
+
+    //     article.reviews.forEach(review => {
+    //         if (review.user.toString() === req.user._id.toString()) {
+    //             review.comment = comment;
+    //         }
+    //     })
+
+    // } else {
+    //     article.reviews.push(review);
+    //     article.numOfReviews = article.reviews.length
+    //     article.visibility = visibility
+    // }
+    article.reviews.push(review);
+    article.numOfReviews = article.reviews.length
+    article.visibility = visibility
+    // article = await Article.findByIdAndUpdate(req.query.id, req.body, {
+    //     new: true,
+    //     runValidators: true,
+    //     useFindAndModify: false
+    // })
+    await article.save({ validateBeforeSave: false })
+
+    res.status(200).json({
+        success: true,
+        article
+    })
+
+})
+
 
 export {
     allArticles,
     newArticle,
     getSingleArticle,
     updateArticle,
-    deleteArticle
+    deleteArticle,
+    createArticleReview,
 }

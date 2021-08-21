@@ -43,6 +43,21 @@
     margin-bottom: 0px;
 }
 
+.revisionBtn {
+    margin-right: 1px;
+}
+
+.remarks {
+    top: "-19px";
+    position: "absolute";
+    margin-top: 1%;
+}
+
+.feedbackBtn {
+    float: "right";
+    margin-bottom: 16px;
+}
+
 @media (max-width: 600px) {
     .grid {
         grid-template-columns: 1fr;

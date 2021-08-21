@@ -88,7 +88,7 @@ const ArticleSchema = new Schema({
         required: true
     },
     docId: {
-        type: [String],
+        type: String,
         trim: true,
         required: true
     },
@@ -116,9 +116,9 @@ const ArticleSchema = new Schema({
                 type: String,
                 // required: true
             },
-            rating: {
-                type: Number,
-            },
+            // rating: {
+            //     type: Number,
+            // },
             comment: {
                 type: String,
                 // required: true
@@ -128,6 +128,10 @@ const ArticleSchema = new Schema({
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User',
+        required: true,
+    },
+    authorUserId: {
+        type: String,
         required: true,
     },
     visibility: {

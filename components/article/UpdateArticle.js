@@ -5,8 +5,8 @@ import ButtonLoader from '@/components/layout/ButtonLoader'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify';
 
-import { updateArticle, clearErrors } from '@/redux/actions/articleActions'
-import { NEW_ARTICLE_RESET } from '@/redux/constants/articleConstants'
+import { updateArticle, getArticleDetails, clearErrors } from '@/redux/actions/articleActions'
+import { UPDATE_ARTICLE_RESET } from '@/redux/constants/articleConstants'
 import Link from 'next/link'
 import styles from '@/styles/Form.module.css'
 
@@ -15,10 +15,13 @@ const UpdateArticle = () => {
     const [title, setTitle] = useState('')
     const [department, setDepartment] = useState('')
     const [description, setDescription] = useState('')
+    const [description_file, setDescription_file] = useState([])
     const [causes, setCauses] = useState('')
     const [stages, setStages] = useState('')
+    const [stages_file, setStages_file] = useState([])
     const [consequences, setConsequences] = useState('')
     const [remediesAndTreatments, setRemediesAndTreatments] = useState('')
+    const [remedies_file, setRemedies_file] = useState([])
     const [faq, setFaq] = useState('')
     const [prevention, setPrevention] = useState('')
     const [adverse, setAdverse] = useState('')
@@ -46,21 +49,19 @@ const UpdateArticle = () => {
     //     refLink: ''
     // })
     // const { title, department, description, causes, stages, consequences, remediesAndTreatments, faq, prevention, adverse, sideEffect, diagnosis, symptoms, docId, refLink } = values
-    const [description_file, setDescription_file] = useState([])
-    const [stages_file, setStages_file] = useState([])
-    const [remedies_file, setRemedies_file] = useState([])
+
     const dispatch = useDispatch()
     const router = useRouter()
 
     const { user } = useSelector(state => state.loadedUser)
-    const { loading, error, success } = useSelector(state => state.article)
-
+    const { error, isUpdated } = useSelector(state => state.article)
+    const { article, loading } = useSelector(state => state.articleDetails)
     const articleId = router.query.id;
 
     useEffect(() => {
 
         if (article && article._id !== articleId) {
-            dispatch(getUserDetails(articleId))
+            dispatch(getArticleDetails(articleId))
         } else {
             setTitle(article.title)
             setDepartment(article.department)
@@ -84,37 +85,20 @@ const UpdateArticle = () => {
             dispatch(clearErrors())
         }
 
-        if (success) {
+        if (isUpdated) {
             router.push('/me/publications/pending-articles')
-            dispatch({ type: NEW_ARTICLE_RESET })
+            dispatch({ type: UPDATE_ARTICLE_RESET })
         }
 
-    }, [dispatch, error, success])
+    }, [dispatch, isUpdated, articleId, article, error])
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const articleData = {
-            title,
-            department,
-            description,
-            description_file,
-            causes,
-            stages,
-            stages_file,
-            consequences,
-            remediesAndTreatments,
-            remedies_file,
-            faq,
-            prevention,
-            adverse,
-            sideEffect,
-            diagnosis,
-            symptoms,
-            docId,
-            refLink
+            title, department, description, description_file, causes, stages, stages_file, consequences, remediesAndTreatments, remedies_file, faq, prevention, adverse, sideEffect, diagnosis, symptoms, refLink
         }
-        dispatch(updateArticle(articleData))
+        dispatch(updateArticle(article._id, articleData))
     }
 
     const handleInputChange = (e) => {
@@ -145,7 +129,7 @@ const UpdateArticle = () => {
     }
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
-            <h1>Add Article</h1>
+            <h1>Editor Panel</h1>
             <div className={styles.grid}>
                 <div>
                     <input type="text" id="title" name="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Enter Title..." />
@@ -208,7 +192,7 @@ const UpdateArticle = () => {
                         <input type="text" value={user && user.username} placeholder="User ID" disabled />
                     </div>
                     <div>
-                        <input type="text" id="docId" name="docId" value={docId} onChange={(e) => setDocId(e.target.value)} placeholder="Doctor ID" />
+                        <input type="text" id="docId" name="docId" value={docId} onChange={(e) => setDocId(e.target.value)} placeholder="Doctor ID" disabled />
                     </div>
                 </div>
                 <div>
@@ -218,7 +202,7 @@ const UpdateArticle = () => {
             {/* <div style={{ marginTop: '6px' }}>
                     <input type="button" value="Save as Draft" className='btn-secondary' />
                 </div> */}
-            <button type="submit" style={{ width: '100%' }} className="btn btn-danger mt-2" disabled={loading ? true : false} >{loading ? <ButtonLoader /> : 'SUBMIT FOR REVIEW'} </button>
+            <button type="submit" style={{ width: '100%' }} className="btn btn-danger mt-2" disabled={loading ? true : false} >{loading ? <ButtonLoader /> : 'UPDATE & SUBMIT FOR REVIEW'} </button>
             {/* <input type="submit" value="SUBMIT FOR REVIEW" className='btn-danger' /> */}
         </form>
     )

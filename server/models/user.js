@@ -110,7 +110,7 @@ const UserSchema = new Schema({
         // default: 'dept'
     },
     reference_no: {
-        type: [String],
+        type: String,
         // required: true,
         // default: '(Seperated By Comma)'
     },

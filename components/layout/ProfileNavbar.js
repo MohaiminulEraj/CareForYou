@@ -25,11 +25,13 @@ const ProfileNavbar = () => {
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto" activeKey={location.pathname}>
-                                <Nav.Link href="/me"><FaHome /></Nav.Link>
+                                {user && user.role === 'doctor' && (
+                                    <Nav.Link href="/me"><FaHome /></Nav.Link>)
+                                }
                                 <NavDropdown title="PUBLICATIONS" id="basic-nav-dropdown">
                                     <NavDropdown.Item href="/me/publications/pending-articles">Pending Articles</NavDropdown.Item>
-                                    <NavDropdown.Item href="#action/3.2">Approved Articles</NavDropdown.Item>
-                                    <NavDropdown.Item href="#action/3.3">Revised Articles</NavDropdown.Item>
+                                    <NavDropdown.Item href="/me/publications/approved-articles">Approved Articles</NavDropdown.Item>
+                                    <NavDropdown.Item href="/me/publications/revised-articles">Revised Articles</NavDropdown.Item>
                                     {/* <NavDropdown.Divider />
                                     <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
                                 </NavDropdown>
@@ -37,6 +39,9 @@ const ProfileNavbar = () => {
                                     <a>DIAGNOSTIC REPORTS</a>
                                 </Nav.Link>
                                 <Nav.Link href="/me/prescriptions">PRESCRIPTION</Nav.Link>
+                                {user && user.role === 'doctor' && (
+                                    <Nav.Link href="/me/checkup">CHECK UP</Nav.Link>)
+                                }
                                 <Nav.Link href="/me/consultant">CONSULTANT</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>

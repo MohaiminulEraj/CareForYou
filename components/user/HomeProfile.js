@@ -2,15 +2,15 @@ import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
+import { FaEye, FaTrashAlt } from "react-icons/fa";
 import { MDBDataTable } from 'mdbreact'
-import Loader from '../../layout/Loader'
+import Loader from '../layout/Loader'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify';
 
 import { getArticles, deleteArticle, clearErrors } from '@/redux/actions/articleActions'
-import { DELETE_ARTICLE_RESET } from '@/redux/constants/articleConstants'
+// import { DELETE_ARTICLE_RESET } from '@/redux/constants/articleConstants'
 
 const PendingArticles = () => {
 
@@ -29,20 +29,20 @@ const PendingArticles = () => {
             dispatch(clearErrors())
         }
 
-        if (deleteError) {
-            toast.erroe(deleteError);
-            dispatch(clearErrors())
-        }
+        // if (deleteError) {
+        //     toast.erroe(deleteError);
+        //     dispatch(clearErrors())
+        // }
 
-        if (isDeleted) {
-            router.push('/me/publications/pending-articles')
-            dispatch({ type: DELETE_ARTICLE_RESET })
-        }
+        // if (isDeleted) {
+        //     router.push('/me/publications/pending-articles')
+        //     dispatch({ type: DELETE_ARTICLE_RESET })
+        // }
 
-    }, [dispatch, error, isDeleted]);
+    }, [dispatch]);
 
 
-    const setArticles = () => {
+    const setUsers = () => {
         const data = {
             columns: [
                 {
@@ -71,8 +71,8 @@ const PendingArticles = () => {
                     sort: 'asc'
                 },
                 {
-                    label: 'Submited To',
-                    field: 'docId',
+                    label: 'Submited By',
+                    field: 'authorUserId',
                     sort: 'asc'
                 },
                 {
@@ -85,25 +85,25 @@ const PendingArticles = () => {
             rows: []
         }
         user && articles && articles.forEach(article => {
-            if (user._id === article.author && article.visibility === 'private') {
+            if (user.username === article.docId && article.visibility === 'private') {
                 data.rows.push({
                     title: article.title,
                     department: article.department,
                     symptoms: article.symptoms,
                     description: article.description.length <= 100 && article.description.substring(0, 150),
                     visibility: article.visibility,
-                    docId: article.docId,
+                    authorUserId: article.authorUserId,
                     actions:
                         <>
-                            <Link href={`/me/publications/update-article/${article._id}`}>
+                            <Link href={`/me/review-article/${article._id}`}>
                                 <a className="btn btn-primary">
-                                    <FaPencilAlt />
+                                    <FaEye />
                                 </a>
                             </Link>
 
-                            <button className="btn btn-danger mx-2" onClick={() => deleteArticleHandler(article._id)}>
+                            {/* <button className="btn btn-danger mx-2" onClick={() => deleteArticleHandler(article._id)}>
                                 <FaTrashAlt />
-                            </button>
+                            </button> */}
 
                         </>
                 })
@@ -114,25 +114,25 @@ const PendingArticles = () => {
 
     }
 
-    const deleteArticleHandler = (id) => {
-        user.articles.forEach(article => {
-            if (article === id) {
-                article = ''
-                dispatch(deleteArticle(id))
-            }
-        })
-    }
+    // const deleteArticleHandler = (id) => {
+    //     user.articles.forEach(article => {
+    //         if (article === id) {
+    //             article = ''
+    //             dispatch(deleteArticle(id))
+    //         }
+    //     })
+    // }
 
     return (
         <div className='container container-fluid'>
             {loading ? <Loader /> :
                 <>
                     {/* <h3 className='my-3 text-center'>{`"${user && user.articles.length}" Articles pending for approval`}</h3> */}
-                    <h3 className='my-3 text-center'>{`Pending Articles`}</h3>
+                    <h3 className='my-3 text-center'>{`Articles for Review`}</h3>
 
 
                     <MDBDataTable
-                        data={setArticles()}
+                        data={setUsers()}
                         className='px-3'
                         bordered
                         striped

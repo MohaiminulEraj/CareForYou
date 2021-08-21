@@ -27,10 +27,11 @@ const AddNewArticle = () => {
         sideEffect: '',
         diagnosis: [],
         symptoms: [],
-        docId: [],
-        refLink: ''
+        docId: '',
+        refLink: '',
+        authorUserId: user?.username,
     })
-    const { title, department, description, causes, stages, consequences, remediesAndTreatments, faq, prevention, adverse, sideEffect, diagnosis, symptoms, docId, refLink } = values
+    const { title, department, description, causes, stages, consequences, remediesAndTreatments, faq, prevention, adverse, sideEffect, diagnosis, symptoms, docId, refLink, authorUserId } = values
     const [description_file, setDescription_file] = useState([])
     const [stages_file, setStages_file] = useState([])
     const [remedies_file, setRemedies_file] = useState([])
@@ -73,7 +74,8 @@ const AddNewArticle = () => {
             diagnosis,
             symptoms,
             docId,
-            refLink
+            refLink,
+            authorUserId: user?.username,
         }
         dispatch(newArticle(articleData))
     }
@@ -166,7 +168,7 @@ const AddNewArticle = () => {
                 </div>
                 <div className={styles.grid}>
                     <div>
-                        <input type="text" value={user && user.username} onChange={handleInputChange} placeholder="User ID" disabled />
+                        <input type="text" value={user?.username} name="authorUserId" placeholder="User ID" disabled />
                     </div>
                     <div>
                         <input type="text" id="docId" name="docId" value={docId} onChange={handleInputChange} placeholder="Doctor ID" />

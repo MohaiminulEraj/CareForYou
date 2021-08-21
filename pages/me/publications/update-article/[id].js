@@ -1,14 +1,13 @@
 import React from 'react'
-import MyProfile from '@/components/user/MyProfile'
-import HomeProfile from '@/components/user/HomeProfile'
-import Layout from '@/components/layout/Layout'
 import { getSession } from 'next-auth/client'
 
-const myProfilePage = () => {
+import UpdateArticle from '@/components/article/UpdateArticle'
+import Layout from '@/components/layout/Layout'
+
+const UpdateArticlePage = () => {
     return (
-        <Layout title="My Profile">
-            <MyProfile />
-            <HomeProfile />
+        <Layout title='Update Article'>
+            <UpdateArticle />
         </Layout>
     )
 }
@@ -28,4 +27,4 @@ export async function getServerSideProps(context) {
     }
 }
 
-export default myProfilePage
+export default UpdateArticlePage

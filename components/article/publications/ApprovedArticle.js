@@ -42,7 +42,7 @@ const PendingArticles = () => {
     }, [dispatch, error, isDeleted]);
 
 
-    const setArticles = () => {
+    const setUsers = () => {
         const data = {
             columns: [
                 {
@@ -71,11 +71,6 @@ const PendingArticles = () => {
                     sort: 'asc'
                 },
                 {
-                    label: 'Submited To',
-                    field: 'docId',
-                    sort: 'asc'
-                },
-                {
                     label: 'Actions',
                     field: 'actions',
                     sort: 'asc'
@@ -85,18 +80,18 @@ const PendingArticles = () => {
             rows: []
         }
         user && articles && articles.forEach(article => {
-            if (user._id === article.author && article.visibility === 'private') {
+            console.log(article.visibility)
+            if (user._id === article.author && article.visibility === 'public') {
                 data.rows.push({
                     title: article.title,
                     department: article.department,
                     symptoms: article.symptoms,
                     description: article.description.length <= 100 && article.description.substring(0, 150),
                     visibility: article.visibility,
-                    docId: article.docId,
                     actions:
                         <>
-                            <Link href={`/me/publications/update-article/${article._id}`}>
-                                <a className="btn btn-primary">
+                            <Link href={`/admin/users/${article._id}`}>
+                                <a target="_blank" className="btn btn-primary">
                                     <FaPencilAlt />
                                 </a>
                             </Link>
@@ -128,11 +123,11 @@ const PendingArticles = () => {
             {loading ? <Loader /> :
                 <>
                     {/* <h3 className='my-3 text-center'>{`"${user && user.articles.length}" Articles pending for approval`}</h3> */}
-                    <h3 className='my-3 text-center'>{`Pending Articles`}</h3>
+                    <h3 className='my-3 text-center'>{`Approved Articles`}</h3>
 
 
                     <MDBDataTable
-                        data={setArticles()}
+                        data={setUsers()}
                         className='px-3'
                         bordered
                         striped

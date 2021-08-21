@@ -43,8 +43,10 @@ const currentUserProfile = catchAsyncErrors(async (req, res) => {
 })
 
 // Update user profile => /api/me/update
-const updateProfile = catchAsyncErrors(async (req, res) => {
+const updateProfile = catchAsyncErrors(async (req, res, next) => {
     const user = await User.findById(req.user._id);
+    const validateUser = false;
+    const checkUser = await User.find({ username: req.body.reference_no, role: "doctor" });
     if (user) {
         user.fullname = req.body.fullname;
         user.email = req.body.email;
@@ -58,8 +60,12 @@ const updateProfile = catchAsyncErrors(async (req, res) => {
         user.license_no = req.body.license_no;
         user.university = req.body.university;
         user.dept_doc = req.body.dept_doc;
-        user.reference_no = req.body.reference_no;
-
+        if (checkUser.length > 0 && req.user.username !== req.body.reference_no || req.body.reference_no === undefined) {
+            user.reference_no = req.body.reference_no;
+        } else {
+            return next(new ErrorHandler(`Sorry! There is no Doctor by this Username: ${req.body.reference_no}`, 404))
+        }
+        console.log(req.body.reference_no)
     }
     //Update avatar
     if (req.body.avatar !== '') {

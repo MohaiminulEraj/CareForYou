@@ -8,6 +8,15 @@ import {
     NEW_ARTICLE_RESET,
     NEW_ARTICLE_FAIL,
 
+    ARTICLE_DETAILS_REQUEST,
+    ARTICLE_DETAILS_SUCCESS,
+    ARTICLE_DETAILS_FAIL,
+
+    NEW_REVIEW_REQUEST,
+    NEW_REVIEW_SUCCESS,
+    NEW_REVIEW_RESET,
+    NEW_REVIEW_FAIL,
+
     UPDATE_ARTICLE_REQUEST,
     UPDATE_ARTICLE_SUCCESS,
     UPDATE_ARTICLE_RESET,
@@ -54,42 +63,6 @@ export const allArticlesReducer = (state = { articles: [] }, action) => {
             return state
     }
 }
-
-// export const newArticleReducer = (state = { article: null }, action) => {
-//     switch (action.type) {
-//         case NEW_ARTICLE_REQUEST:
-//             return {
-//                 loading: true
-//             }
-
-//         case NEW_ARTICLE_SUCCESS:
-//             return {
-//                 loading: false,
-//                 success: true,
-//                 // article: action.payload.article
-//             }
-
-//         case NEW_ARTICLE_RESET:
-//             return {
-//                 success: false
-//             }
-
-//         case NEW_ARTICLE_FAIL:
-//             return {
-//                 loading: false,
-//                 error: action.payload
-//             }
-
-//         case CLEAR_ERRORS:
-//             return {
-//                 ...state,
-//                 error: null
-//             }
-
-//         default:
-//             return state
-//     }
-// }
 
 
 export const newArticleReducer = (state = { article: {} }, action) => {
@@ -162,6 +135,74 @@ export const articleReducer = (state = {}, action) => {
 
         case UPDATE_ARTICLE_FAIL:
         case DELETE_ARTICLE_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
+
+// Article details reducer
+export const articleDetailsReducer = (state = { article: {} }, action) => {
+    switch (action.type) {
+
+        case ARTICLE_DETAILS_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case ARTICLE_DETAILS_SUCCESS:
+            return {
+                loading: false,
+                article: action.payload
+            }
+
+        case ARTICLE_DETAILS_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
+
+export const newReviewReducer = (state = {}, action) => {
+    switch (action.type) {
+        case NEW_REVIEW_REQUEST:
+            return {
+                loading: true
+            }
+
+        case NEW_REVIEW_SUCCESS:
+            return {
+                loading: false,
+                success: action.payload
+            }
+
+        case NEW_REVIEW_RESET:
+            return {
+                success: false
+            }
+
+        case NEW_REVIEW_FAIL:
             return {
                 loading: false,
                 error: action.payload

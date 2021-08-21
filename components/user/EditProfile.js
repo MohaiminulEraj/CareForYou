@@ -28,7 +28,7 @@ const EditProfile = () => {
         university: '',
         license_no: '',
         dept_doc: '',
-        reference_no: []
+        reference_no: ''
     })
     const { fullname, username, email, password, dateofbirth, gender, city, country, zip, phone, university, license_no, dept_doc, reference_no } = user
     const [credential, setCredential] = useState('');
@@ -216,7 +216,7 @@ const EditProfile = () => {
                         <div className="col">
                             <label htmlFor="refNo">Reference ID:</label>
                             <input id="refNo" type="text" className="form-control" placeholder="Applicable if you want to register as a doctor" name="reference_no"
-                                onChange={onChange} value={reference_no[0] !== '(Separated by comma)' ? reference_no : ''}
+                                onChange={onChange} value={reference_no}
                             />
                         </div>
                         <div className="col">

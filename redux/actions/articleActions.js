@@ -9,6 +9,14 @@ import {
     NEW_ARTICLE_SUCCESS,
     NEW_ARTICLE_FAIL,
 
+    ARTICLE_DETAILS_REQUEST,
+    ARTICLE_DETAILS_SUCCESS,
+    ARTICLE_DETAILS_FAIL,
+
+    NEW_REVIEW_REQUEST,
+    NEW_REVIEW_SUCCESS,
+    NEW_REVIEW_FAIL,
+
     UPDATE_ARTICLE_REQUEST,
     UPDATE_ARTICLE_SUCCESS,
     UPDATE_ARTICLE_FAIL,
@@ -20,18 +28,20 @@ import {
     CLEAR_ERRORS
 } from '../constants/articleConstants'
 
-//Get all articles
 export const getArticles = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_ARTICLES_REQUEST });
-        // const { origin } = absoluteUrl(req);
-        // const { data } = await axios.get(`${origin}/api/articles`)
         const { data } = await axios.get(`/api/articles`)
+        // const { origin } = absoluteUrl(req);
+        // let link = `${origin}/api/articles?page=${currentPage}&location=${location}`
+
+        // const { data } = await axios.get(link)
 
         dispatch({
             type: ALL_ARTICLES_SUCCESS,
-            payload: data.articles,
+            payload: data.article
         })
+
     } catch (error) {
         dispatch({
             type: ALL_ARTICLES_FAIL,
@@ -40,21 +50,66 @@ export const getArticles = () => async (dispatch) => {
     }
 }
 
+
+// //Get all articles
+// export const getArticles = (req, currentPage = 1, location = '') => async (dispatch) => {
+//     try {
+//         // dispatch({ type: ALL_ARTICLES_REQUEST });
+//         // const { data } = await axios.get(`/api/articles`)
+//         const { origin } = absoluteUrl(req);
+//         let link = `${origin}/api/articles?page=${currentPage}&location=${location}`
+
+//         const { data } = await axios.get(link)
+
+//         dispatch({
+//             type: ALL_ARTICLES_SUCCESS,
+//             payload: data
+//         })
+
+//     } catch (error) {
+//         dispatch({
+//             type: ALL_ARTICLES_FAIL,
+//             payload: error.response.data.message,
+//         })
+//     }
+// }
+
+// // Get article details
+// export const getArticleDetails = (req, id) => async (dispatch) => {
+//     try {
+
+//         const { origin } = absoluteUrl(req);
+
+//         let url;
+
+//         if (req) {
+//             url = `${origin}/api/articles/${id}`
+//         } else {
+//             url = `/api/articles/${id}`
+//         }
+
+//         const { data } = await axios.get(url)
+
+//         dispatch({
+//             type: ARTICLE_DETAILS_SUCCESS,
+//             payload: data.article
+//         })
+
+//     } catch (error) {
+//         dispatch({
+//             type: ARTICLE_DETAILS_FAIL,
+//             payload: error.response.data.message
+//         })
+//     }
+// }
+
 // Get article details
-export const getArticleDetails = (req, id) => async (dispatch) => {
+export const getArticleDetails = (id) => async (dispatch) => {
     try {
 
-        const { origin } = absoluteUrl(req);
+        dispatch({ type: ARTICLE_DETAILS_REQUEST });
 
-        let url;
-
-        if (req) {
-            url = `${origin}/api/articles/${id}`
-        } else {
-            url = `/api/articles/${id}`
-        }
-
-        const { data } = await axios.get(url)
+        const { data } = await axios.get(`/api/articles/${id}`)
 
         dispatch({
             type: ARTICLE_DETAILS_SUCCESS,
@@ -68,7 +123,6 @@ export const getArticleDetails = (req, id) => async (dispatch) => {
         })
     }
 }
-
 
 export const newArticle = (articleData) => async (dispatch) => {
     try {
@@ -139,6 +193,33 @@ export const deleteArticle = (id) => async (dispatch) => {
 
         dispatch({
             type: DELETE_ARTICLE_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const newReview = (id, reviewData) => async (dispatch) => {
+    try {
+
+        dispatch({ type: NEW_REVIEW_REQUEST })
+
+        const config = {
+            header: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        // const { data } = await axios.put(`/api/reviews`, reviewData, config)
+        const { data } = await axios.put(`/api/articles/${id}`, reviewData, config)
+
+        dispatch({
+            type: NEW_REVIEW_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (error) {
+        dispatch({
+            type: NEW_REVIEW_FAIL,
             payload: error.response.data.message
         })
     }
