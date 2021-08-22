@@ -9,6 +9,7 @@ import ErrorHandler from '../utils/errorHandler'
 // GET - all articles=> /api/articles
 const allArticles = catchAsyncErrors(async (req, res) => {
     const articles = await Article.find({});
+    console.log(articles.length)
     res.status(200).json({
         success: true,
         articles,

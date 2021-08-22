@@ -44,7 +44,7 @@ export const allArticlesReducer = (state = { articles: [] }, action) => {
                 // articlesCount: action.payload.articlesCount,
                 // resPerPage: action.payload.resPerPage,
                 // filteredArticlesCount: action.payload.filteredArticlesCount,
-                // articles: action.payload.articles
+                // articles: action.payload.articles,
                 loading: false,
                 articles: action.payload
             }

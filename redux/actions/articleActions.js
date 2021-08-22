@@ -32,20 +32,16 @@ export const getArticles = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_ARTICLES_REQUEST });
         const { data } = await axios.get(`/api/articles`)
-        // const { origin } = absoluteUrl(req);
-        // let link = `${origin}/api/articles?page=${currentPage}&location=${location}`
-
-        // const { data } = await axios.get(link)
 
         dispatch({
             type: ALL_ARTICLES_SUCCESS,
-            payload: data.article
+            payload: data.articles
         })
 
     } catch (error) {
         dispatch({
             type: ALL_ARTICLES_FAIL,
-            payload: error.response.data.message,
+            payload: error.response.data.message
         })
     }
 }
