@@ -28,6 +28,24 @@ import {
     CLEAR_ERRORS
 } from '../constants/articleConstants'
 
+export const getPublishedArticles = () => async (dispatch) => {
+    try {
+        dispatch({ type: ALL_ARTICLES_REQUEST });
+        const { data } = await axios.get(`/api/articles`)
+
+        dispatch({
+            type: ALL_ARTICLES_SUCCESS,
+            payload: data.articles
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ALL_ARTICLES_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
 export const getArticles = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_ARTICLES_REQUEST });

@@ -10,7 +10,7 @@ const handler = nc({ onError });
 
 dbConnect();
 
-handler.get(getSingleArticle)
+handler.use(isAuthenticatedUser).get(getSingleArticle)
 
 handler.use(isAuthenticatedUser).put(updateArticle)
 

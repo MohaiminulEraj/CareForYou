@@ -105,6 +105,7 @@ const ArticleSchema = new Schema({
         type: Number,
         defualt: 0
     },
+    docFeedBack: String,
     reviews: [
         {
             user: {

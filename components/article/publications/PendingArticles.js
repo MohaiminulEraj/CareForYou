@@ -19,7 +19,6 @@ const PendingArticles = () => {
     const { loading, error, articles } = useSelector(state => state.allArticles)
     const { user } = useSelector(state => state.loadedUser)
     const { error: deleteError, isDeleted } = useSelector(state => state.article)
-    console.log(articles)
     useEffect(() => {
 
         dispatch(getArticles())
@@ -84,7 +83,6 @@ const PendingArticles = () => {
             ],
             rows: []
         }
-        console.log(user?.articles[0].title)
         console.log(articles)
         user && articles && articles.forEach(article => {
             console.log(article)

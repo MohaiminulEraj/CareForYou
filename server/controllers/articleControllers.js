@@ -6,10 +6,21 @@ import APIFeatures from '../utils/apiFeatures'
 import ErrorHandler from '../utils/errorHandler'
 
 
+// GET - all published articles=> /api/articles
+const allPublishedArticles = catchAsyncErrors(async (req, res) => {
+    const articles = await Article.find({ visibility: 'public' });
+    console.log('publishd')
+    res.status(200).json({
+        success: true,
+        articles,
+        message: 'All published Articles'
+    });
+})
+
+
 // GET - all articles=> /api/articles
 const allArticles = catchAsyncErrors(async (req, res) => {
-    const articles = await Article.find({});
-    console.log(articles.length)
+    const articles = await Article.find();
     res.status(200).json({
         success: true,
         articles,
@@ -202,6 +213,12 @@ const updateArticle = catchAsyncErrors(async (req, res) => {
         }
         req.body.remedies_file = remedies_fileLinks;
     }
+    // console.log(article.visibility)
+    // console.log(req.body.visibility)
+    if (article.visibility === 'protected') {
+        req.body.visibility = 'private';
+    }
+    // req.body.visibility = 'private';
 
     // if (req.body.diagnosis) {
     //     req.body.diagnosis = req.body.diagnosis.split(',');
@@ -215,6 +232,7 @@ const updateArticle = catchAsyncErrors(async (req, res) => {
     //         req.body.symptoms[i] = req.body.symptoms[i].trim();
     //     }
     // }
+
     article = await Article.findByIdAndUpdate(req.query.id, req.body, {
         new: true,
         runValidators: true,
@@ -324,6 +342,7 @@ const createArticleReview = catchAsyncErrors(async (req, res) => {
 
 
 export {
+    allPublishedArticles,
     allArticles,
     newArticle,
     getSingleArticle,

@@ -5,16 +5,16 @@ import ButtonLoader from '@/components/layout/ButtonLoader'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify';
 
-import { newReview, getArticleDetails, clearErrors } from '@/redux/actions/articleActions'
+import { newReview, updateArticle, getArticleDetails, clearErrors } from '@/redux/actions/articleActions'
 import { NEW_REVIEW_RESET } from '@/redux/constants/articleConstants'
 import Link from 'next/link'
 import styles from '@/styles/Form.module.css'
 
 const ReviewArticle = () => {
 
-    const [comment, setComment] = useState('');
+    const [docFeedBack, setDocFeedBack] = useState('');
+    // const [comment, setComment] = useState('');
     const [visibility, setVisibility] = useState('');
-
     const [title, setTitle] = useState('')
     const [department, setDepartment] = useState('')
     const [author, setAuthor] = useState('')
@@ -90,6 +90,7 @@ const ReviewArticle = () => {
             setSymptoms(article.symptoms)
             setDocId(article.docId)
             setRefLink(article.refLink)
+            setDocFeedBack(article.docFeedBack)
         }
         if (error) {
             toast.error(error);
@@ -107,9 +108,11 @@ const ReviewArticle = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (visibility !== "private") {
+            // console.log(visibility)
             const reviewData = {
-                comment, articleId: articleId, visibility
+                docFeedBack, articleId: articleId, visibility
             }
+            console.log(reviewData)
             dispatch(newReview(article._id, reviewData))
         }
         else {
@@ -197,7 +200,12 @@ const ReviewArticle = () => {
                             >Remarks
                             </span>
                             {/* <fieldset style={{ height: "" }} name="" id=""></fieldset> */}
-                            <textarea style={{ height: "80%", float: "right", marginBottom: "16px" }} onChange={(e) => setComment(e.target.value)} name="review" id="review" placeholder="Give feedback..."></textarea>
+                            <textarea
+                                style={{ height: "80%", float: "right", marginBottom: "16px" }} value={docFeedBack}
+                                onChange={(e) => setDocFeedBack(e.target.value)}
+                                name="review"
+                                placeholder="Give feedback..."
+                            ></textarea>
                             {/* <label htmlFor="userRole">Role: </label> */}
                             <select value={visibility} onChange={(e) => setVisibility(e.target.value)} className="form-control" name="visibility" id="articleVisibility" required>
                                 <option value='private'>Please Select: </option>
@@ -212,7 +220,7 @@ const ReviewArticle = () => {
                             </button> */}
                         </div>
                         <button
-                            className="btn btn-outline-primary appointment-button"
+                            className="btn btn-primary appointment-button mb-4"
                             type="submit"
                             style={{ float: "right", width: "100%" }}
                         >
