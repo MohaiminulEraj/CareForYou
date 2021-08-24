@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux'
-import { allArticlesReducer, newArticleReducer, articleReducer, articleDetailsReducer, newReviewReducer } from './articleReducers'
+import { allPublishedArticlesReducer, allArticlesReducer, newArticleReducer, articleReducer, articleDetailsReducer, newReviewReducer } from './articleReducers'
 import { authReducer, userReducer, loadedUserReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer } from './userReducers'
 
 const reducer = combineReducers({
+    allPublishedArticles: allPublishedArticlesReducer,
     allArticles: allArticlesReducer,
     article: articleReducer,
     articleDetails: articleDetailsReducer,

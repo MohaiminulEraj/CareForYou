@@ -9,7 +9,7 @@ const Search = () => {
         e.preventDefault();
         // router.push(`/article/search?term=${term}`);
         if (location.trim()) {
-            router.push(`/?location=${location}`)
+            router.push(`articles?location=${location}`)
         } else {
             router.push('/')
         }

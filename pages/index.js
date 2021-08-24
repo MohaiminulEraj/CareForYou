@@ -11,7 +11,7 @@ import { FaSearch } from 'react-icons/fa'
 import { getArticles } from '@/redux/actions/articleActions'
 import { wrapper } from '@/redux/store'
 
-export default function Home() {
+export default function SearchPage() {
   return (
     <Layout className={styles.container}>
       <AlertDoctor />

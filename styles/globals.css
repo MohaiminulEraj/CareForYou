@@ -14,3 +14,17 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/* Pagination */
+.page-item.active .page-link {
+  background-color: #e61e4d;
+  border-color: #e61e4d;
+}
+
+.page-link {
+  color: #e61e4d;
+}
+
+.page-link:hover {
+  color: #e61e4d;
+}

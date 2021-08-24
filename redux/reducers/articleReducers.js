@@ -31,6 +31,42 @@ import {
 } from '../constants/articleConstants'
 
 // All articles reducer
+export const allPublishedArticlesReducer = (state = { articles: [] }, action) => {
+    switch (action.type) {
+
+        case ALL_ARTICLES_REQUEST:
+            return {
+                loading: true,
+            }
+
+        case ALL_ARTICLES_SUCCESS:
+            return {
+                loading: false,
+                articlesCount: action.payload.articlesCount,
+                resPerPage: action.payload.resPerPage,
+                articles: action.payload
+                // filteredArticlesCount: action.payload.filteredArticlesCount,
+                // articles: action.payload.articles,
+            }
+        case ALL_ARTICLES_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
+
+
+
+// All articles reducer
 export const allArticlesReducer = (state = { articles: [] }, action) => {
     switch (action.type) {
 

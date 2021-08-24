@@ -8,10 +8,24 @@ import ErrorHandler from '../utils/errorHandler'
 
 // GET - all published articles=> /api/articles
 const allPublishedArticles = catchAsyncErrors(async (req, res) => {
-    const articles = await Article.find({ visibility: 'public' });
-    console.log('publishd')
+    const resPerPage = 4;
+
+    const articlesCount = await Article.countDocuments({ visibility: 'public' });
+
+    const apiFeatures = new APIFeatures(Article.find({ visibility: 'public' }), req.query).search()
+
+    let articles = await apiFeatures.query;
+    let filteredarticlesCount = articles.length;
+
+    apiFeatures.pagination(resPerPage)
+    articles = await apiFeatures.query;
+    // console.log(articles)
+    // const articles = await Article.find({ visibility: 'public' });
     res.status(200).json({
         success: true,
+        articlesCount,
+        resPerPage,
+        filteredarticlesCount,
         articles,
         message: 'All published Articles'
     });
