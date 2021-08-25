@@ -83,8 +83,8 @@ const PendingArticles = () => {
                     description: article.description.length <= 100 && article.description.substring(0, 150),
                     actions:
                         <>
-                            <Link href={`/admin/users/${article._id}`}>
-                                <a target="_blank" className="btn btn-primary">
+                            <Link href={`/articles/revise-article/${article._id}`}>
+                                <a className="btn btn-primary">
                                     <FaPencilAlt />
                                 </a>
                             </Link>
