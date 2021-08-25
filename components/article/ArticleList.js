@@ -14,7 +14,7 @@ const ArticleList = ({ article }) => {
                 /> */}
                 <div className="card-body d-flex flex-column">
                     <h2 className="card-title">
-                        <Link href={`/article/${article._id}`}>
+                        <Link href={`/articles/${article._id}`}>
                             <a>{article.title}</a>
                         </Link>
                     </h2>
@@ -33,7 +33,7 @@ const ArticleList = ({ article }) => {
                     </div> */}
 
                     <button className="btn btn-block view-btn">
-                        <Link href={`/article/${article._id}`}>View Details</Link>
+                        <Link href={`/articles/${article._id}`}>View Details</Link>
                     </button>
                 </div>
             </div>
