@@ -30,14 +30,13 @@ import {
 
 export const getPublishedArticles = (req, currentPage = 1, location = '') => async (dispatch) => {
     try {
-        // dispatch({ type: ALL_ARTICLES_REQUEST });
-        // const { data } = await axios.get(`/api/articles/published?page=${currentPage}&location=${location}`)
+        dispatch({ type: ALL_ARTICLES_REQUEST });
+        const { data } = await axios.get(`/api/articles/published?page=${currentPage}&location=${location}`)
 
-        const { origin } = absoluteUrl(req);
+        // const { origin } = absoluteUrl(req);
 
-        let link = `${origin}/api/articles/published?page=${currentPage}&location=${location}`
-
-        const { data } = await axios.get(link)
+        // let link = `${origin}/api/articles/published?page=${currentPage}&location=${location}`
+        // const { data } = await axios.get(link)
 
         dispatch({
             type: ALL_ARTICLES_SUCCESS,

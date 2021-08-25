@@ -42,9 +42,9 @@ export const allPublishedArticlesReducer = (state = { articles: [] }, action) =>
         case ALL_ARTICLES_SUCCESS:
             return {
                 loading: false,
-                articlesCount: action.payload.articlesCount,
-                resPerPage: action.payload.resPerPage,
                 articles: action.payload
+                // articlesCount: action.payload.articlesCount,
+                // resPerPage: action.payload.resPerPage,
                 // filteredArticlesCount: action.payload.filteredArticlesCount,
                 // articles: action.payload.articles,
             }
