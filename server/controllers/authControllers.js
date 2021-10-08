@@ -1,6 +1,6 @@
 import User from '../models/user'
 import cloudinary from 'cloudinary'
-
+import dbConnect from '@/config/dbConnect'
 import ErrorHandler from '../utils/errorHandler'
 import catchAsyncErrors from '../middlewares/catchAsyncErrors'
 import sendEmail from '../utils/sendEmail'
@@ -15,6 +15,7 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
+// dbConnect()
 // Register User => /api/auth/register
 const registerUser = catchAsyncErrors(async (req, res) => {
 

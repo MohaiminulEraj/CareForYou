@@ -136,6 +136,7 @@ const ReviewArticle = () => {
                                 <div>
                                     <strong>Symptoms</strong>
                                     <div id="symptoms">{symptoms}</div>
+                                    <strong>Description</strong>
                                     <div id="desofSym">{description}</div>
                                     <div id="symFile">{description_file}</div>
                                 </div>

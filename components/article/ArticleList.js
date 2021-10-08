@@ -18,7 +18,7 @@ const ArticleList = ({ article }) => {
                             <a>{article.title}</a>
                         </Link>
                     </h2>
-                    <h5>{article.description}</h5>
+                    <h5>{article.description.length >= 60 ? article.description.substring(0, 60) + '...' : article.description}</h5>
 
                     {/* <div className="ratings mt-auto mb-3">
                         <p className="card-text"><b>${article.pricePerNight}</b> / night</p>

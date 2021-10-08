@@ -50,21 +50,21 @@ const PendingArticles = () => {
                     field: 'title',
                     sort: 'asc'
                 },
-                {
-                    label: 'Department',
-                    field: 'department',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Symptoms',
-                    field: 'symptoms',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Description',
-                    field: 'description',
-                    sort: 'asc'
-                },
+                // {
+                //     label: 'Department',
+                //     field: 'department',
+                //     sort: 'asc'
+                // },
+                // {
+                //     label: 'Symptoms',
+                //     field: 'symptoms',
+                //     sort: 'asc'
+                // },
+                // {
+                //     label: 'Description',
+                //     field: 'description',
+                //     sort: 'asc'
+                // },
                 {
                     label: 'Visibility',
                     field: 'visibility',
@@ -84,9 +84,9 @@ const PendingArticles = () => {
             if (user._id === article.author && article.visibility === 'public') {
                 data.rows.push({
                     title: article.title,
-                    department: article.department,
-                    symptoms: article.symptoms,
-                    description: article.description.length <= 100 && article.description.substring(0, 150),
+                    // department: article.department,
+                    // symptoms: article.symptoms,
+                    // description: article.description.length <= 100 && article.description.substring(0, 150),
                     visibility: article.visibility,
                     actions:
                         <>

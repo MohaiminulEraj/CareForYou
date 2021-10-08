@@ -118,6 +118,7 @@ const ReviseArticle = () => {
                                 <div>
                                     <strong>Symptoms</strong>
                                     <div id="symptoms">{symptoms}</div>
+                                    <strong>Description</strong>
                                     <div id="desofSym">{description}</div>
                                     <div id="symFile">{description_file}</div>
                                 </div>
@@ -178,7 +179,7 @@ const ReviseArticle = () => {
                         </div>
                         <div className="col-md-3">
                             <span style={{ top: "-19px", marginTop: "1%" }}
-                            >Feedback
+                            >Feedback from {docId}
                             </span>
                             <textarea
                                 style={{ height: "80%", float: "right", marginBottom: "16px" }} value={docFeedBack}

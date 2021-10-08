@@ -129,7 +129,7 @@ const UpdateArticle = () => {
     }
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
-            <h1>Editor Panel</h1>
+            <h1 className="text-center">Update Article</h1>
             <div className={styles.grid}>
                 <div>
                     <input type="text" id="title" name="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Enter Title..." />
@@ -202,7 +202,7 @@ const UpdateArticle = () => {
             {/* <div style={{ marginTop: '6px' }}>
                     <input type="button" value="Save as Draft" className='btn-secondary' />
                 </div> */}
-            <button type="submit" style={{ width: '100%' }} className="btn btn-danger my-2" disabled={loading ? true : false} >{loading ? <ButtonLoader /> : 'UPDATE & SUBMIT FOR REVIEW'} </button>
+            <button type="submit" style={{ width: '100%' }} className="btn btn-danger my-4" disabled={loading ? true : false} >{loading ? <ButtonLoader /> : 'UPDATE & SUBMIT FOR REVIEW'} </button>
             {/* <input type="submit" value="SUBMIT FOR REVIEW" className='btn-danger' /> */}
         </form>
     )

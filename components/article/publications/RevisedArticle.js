@@ -50,21 +50,21 @@ const PendingArticles = () => {
                     field: 'title',
                     sort: 'asc'
                 },
-                {
-                    label: 'Department',
-                    field: 'department',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Symptoms',
-                    field: 'symptoms',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Description',
-                    field: 'description',
-                    sort: 'asc'
-                },
+                // {
+                //     label: 'Department',
+                //     field: 'department',
+                //     sort: 'asc'
+                // },
+                // {
+                //     label: 'Symptoms',
+                //     field: 'symptoms',
+                //     sort: 'asc'
+                // },
+                // {
+                //     label: 'Description',
+                //     field: 'description',
+                //     sort: 'asc'
+                // },
                 {
                     label: 'Actions',
                     field: 'actions',
@@ -78,9 +78,9 @@ const PendingArticles = () => {
             if (user._id === article.author && article.visibility === 'protected') {
                 data.rows.push({
                     title: article.title,
-                    department: article.department,
-                    symptoms: article.symptoms,
-                    description: article.description.length <= 100 && article.description.substring(0, 150),
+                    // department: article.department,
+                    // symptoms: article.symptoms,
+                    // description: article.description.length <= 100 && article.description.substring(0, 150),
                     actions:
                         <>
                             <Link href={`/articles/revise-article/${article._id}`}>

@@ -29,7 +29,7 @@ const PendingArticles = () => {
         }
 
         if (deleteError) {
-            toast.erroe(deleteError);
+            toast.error(deleteError);
             dispatch(clearErrors())
         }
 
@@ -49,21 +49,21 @@ const PendingArticles = () => {
                     field: 'title',
                     sort: 'asc'
                 },
-                {
-                    label: 'Department',
-                    field: 'department',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Symptoms',
-                    field: 'symptoms',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Description',
-                    field: 'description',
-                    sort: 'asc'
-                },
+                // {
+                //     label: 'Department',
+                //     field: 'department',
+                //     sort: 'asc'
+                // },
+                // {
+                //     label: 'Symptoms',
+                //     field: 'symptoms',
+                //     sort: 'asc'
+                // },
+                // {
+                //     label: 'Description',
+                //     field: 'description',
+                //     sort: 'asc'
+                // },
                 {
                     label: 'Visibility',
                     field: 'visibility',
@@ -89,9 +89,9 @@ const PendingArticles = () => {
             if (user._id === article.author && article.visibility === 'private') {
                 data.rows.push({
                     title: article.title,
-                    department: article.department,
-                    symptoms: article.symptoms,
-                    description: article.description.length <= 100 && article.description.substring(0, 150),
+                    // department: article.department,
+                    // symptoms: article.symptoms,
+                    // description: article.description.length <= 100 && article.description.substring(0, 150),
                     visibility: article.visibility,
                     docId: article.docId,
                     actions:
@@ -116,8 +116,10 @@ const PendingArticles = () => {
     }
 
     const deleteArticleHandler = (id) => {
+        // console.log(id)
         user.articles.forEach(article => {
             if (article === id) {
+                console.log(article)
                 article = ''
                 dispatch(deleteArticle(id))
             }

@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const ArticleSchema = new Schema({
@@ -127,10 +128,15 @@ const ArticleSchema = new Schema({
         }
     ],
     author: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
+        type: String,
         required: true,
     },
+    // author: {
+    //     // type: Schema.Types.ObjectId,
+    //     type: mongoose.Schema.ObjectId,
+    //     ref: 'User',
+    //     required: true,
+    // },
     authorUserId: {
         type: String,
         required: true,

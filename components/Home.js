@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { FaArrowLeft } from "react-icons/fa";
-// import Pagination from 'react-js-pagination'
 
 import ArticleList from './article/ArticleList'
 
@@ -31,30 +30,6 @@ const Home = () => {
 
     }, [dispatch, error])
 
-    // const handlePagination = (pageNumber) => {
-
-    //     if (location) {
-    //         let url = window.location.search
-
-    //         url.includes('&page') ?
-    //             url = url.replace(/(page=)[^\&]+/, '$1' + pageNumber)
-    //             :
-    //             url = url.concat(`&page=${pageNumber}`)
-
-    //         router.push(url)
-
-    //     } else {
-
-    //         router.push(`/?page=${pageNumber}`)
-    //         // window.location.href = `/?page=${pageNumber}`
-    //     }
-
-    // }
-    // console.log(filteredarticlesCount)
-    // let count = articlesCount;
-    // if (location) {
-    //     count = filteredarticlesCount
-    // }
 
     return (
         <>

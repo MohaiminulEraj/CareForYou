@@ -7,7 +7,7 @@ import styles from '@/styles/Header.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from '@/redux/actions/userActions'
 import { signOut } from 'next-auth/client'
-import { Nav, NavDropdown, Button } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap'
 
 const Header = () => {
     const checkLogin = () => {
@@ -49,8 +49,15 @@ const Header = () => {
                             </a>
                         </Link>
                     )}
+                    {user?.role === 'admin' && (
+                        <Link href='/admin/users/new-application'>
+                            <a>
+                                APPLICATION
+                            </a>
+                        </Link>
+                    )}
 
-                    <Link href='/'>
+                    {/* <Link href='/'>
                         <a>
                             SUPPORT
                         </a>
@@ -59,36 +66,38 @@ const Header = () => {
                         <a>
                             REVIEW
                         </a>
-                    </Link>
+                    </Link> */}
                 </div>
 
+                <Navbar expand="lg">
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
 
-
-                <nav className="navbar navbar-expand-md">
-                    {user ? (
-                        <div className="ml-4 dropdown d-line">
-                            <ul className="navbar-nav mr-auto">
-                                <li className="nav-item">
-                                    <Link href={user && user.role === 'user' ? '/me/publications/pending-articles' : '/me'}>
-                                        {/* <a
+                        <Nav className="navbar navbar-expand-md">
+                            {user ? (
+                                <div className="ml-4 dropdown d-line">
+                                    <ul className="navbar-nav mr-auto">
+                                        <li className="nav-item">
+                                            <Link href={user && user.role === 'user' ? '/me/publications/pending-articles' : '/me'}>
+                                                {/* <a
                                             className="nav-link dropdown-toggle cursor-pointer justify-content-evenly"
                                             id="navbarDropdownMenuLink"
                                             role="button"
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
                                         > */}
-                                        <a className={styles.logo}>
-                                            <img width="45" height="45" style={{ marginRight: 8, border: "1px solid black" }} src={user.avatar ? user.avatar.url : "/images/default_avatar.jpg"} alt={user && user.name} className="rounded-circle" />
-                                            {user && user.fullname.toUpperCase()}
-                                        </a>
-                                        {/* <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                <a className={styles.logo}>
+                                                    <img width="45" height="45" style={{ marginRight: 8, border: "1px solid black" }} src={user.avatar ? user.avatar.url : "/images/default_avatar.jpg"} alt={user && user.name} className="rounded-circle" />
+                                                    {user && user.fullname.toUpperCase()}
+                                                </a>
+                                                {/* <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                         <li><a className="dropdown-item" href="#">Action</a></li>
                                         <li><a className="dropdown-item" href="#">Another action</a></li>
                                         <li><a className="dropdown-item" href="#">Something else here</a></li>
                                     </ul> */}
-                                    </Link>
-                                </li>
-                                {/* {user && user.role == 'doctor' && (
+                                            </Link>
+                                        </li>
+                                        {/* {user && user.role == 'doctor' && (
                                     <li className="nav-item">
                                         <Link href='/me'>
                                             <a className={styles.logo}>
@@ -97,44 +106,46 @@ const Header = () => {
                                         </Link>
                                     </li>)
                                 } */}
-                                {user && user.role == 'admin' && (
+                                        {user && user.role == 'admin' && (
 
+                                            <li className="nav-item">
+                                                <Link href='/admin/users'>
+                                                    <a>
+                                                        USERS
+                                                    </a>
+                                                </Link>
+                                            </li>
+                                        )}
+                                        <li className="nav-item">
+                                            <Link href='/'>
+                                                <a style={{ color: 'whitesmoke' }} className="nav-link btn-dark btn-icon" onClick={logoutHandler}>
+                                                    <FaSignOutAlt /> LOGOUT
+                                                </a>
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            ) :
+                                !loading && <ul className="navbar-nav mr-auto">
                                     <li className="nav-item">
-                                        <Link href='/admin/users'>
-                                            <a>
-                                                USERS
+                                        <Link href='/account/register'>
+                                            <a className="nav-link">
+                                                REGISTER
                                             </a>
                                         </Link>
                                     </li>
-                                )}
-                                <li className="nav-item">
-                                    <Link href='/'>
-                                        <a style={{ color: 'whitesmoke' }} className="nav-link btn-dark btn-icon" onClick={logoutHandler}>
-                                            <FaSignOutAlt /> LOGOUT
-                                        </a>
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
-                    ) :
-                        !loading && <ul className="navbar-nav mr-auto">
-                            <li className="nav-item">
-                                <Link href='/account/register'>
-                                    <a className="nav-link">
-                                        REGISTER
-                                    </a>
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link href='/account/login'>
-                                    <a style={{ color: 'whitesmoke' }} className="nav-link btn-dark btn-icon">
-                                        <FaSignInAlt /> LOGIN
-                                    </a>
-                                </Link>
-                            </li>
-                        </ul>
-                    }
-                </nav>
+                                    <li className="nav-item">
+                                        <Link href='/account/login'>
+                                            <a style={{ color: 'whitesmoke' }} className="nav-link btn-dark btn-icon">
+                                                <FaSignInAlt /> LOGIN
+                                            </a>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            }
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
             </header >
         </>
 

@@ -1,7 +1,14 @@
 .search input {
-    width: 550px;
+    /* width: 550px; */
+    width: 40%;
     height: 35px;
     padding: 5px;
     border: 1px #777 solid;
     border-radius: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+    .search input {
+        width: 80%;
+    }
 }

@@ -25,11 +25,12 @@ const AddNewArticle = () => {
         prevention: '',
         adverse: '',
         sideEffect: '',
-        diagnosis: [],
-        symptoms: [],
+        diagnosis: '',
+        symptoms: '',
         docId: '',
         refLink: '',
-        authorUserId: user?.username,
+        author: '',
+        authorUserId: '',
     })
     const { title, department, description, causes, stages, consequences, remediesAndTreatments, faq, prevention, adverse, sideEffect, diagnosis, symptoms, docId, refLink, authorUserId } = values
     const [description_file, setDescription_file] = useState([])
@@ -75,6 +76,7 @@ const AddNewArticle = () => {
             symptoms,
             docId,
             refLink,
+            author: user?._id,
             authorUserId: user?.username,
         }
         dispatch(newArticle(articleData))
@@ -108,7 +110,7 @@ const AddNewArticle = () => {
     }
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
-            <h1>Add Article</h1>
+            <h1 className="text-center">Create Article</h1>
             <div className={styles.grid}>
                 <div>
                     <input type="text" id="title" name="title" value={title} onChange={handleInputChange} placeholder="Enter Title..." />
@@ -181,7 +183,7 @@ const AddNewArticle = () => {
             {/* <div style={{ marginTop: '6px' }}>
                     <input type="button" value="Save as Draft" className='btn-secondary' />
                 </div> */}
-            <button type="submit" style={{ width: '100%' }} className="btn btn-danger mt-2" disabled={loading ? true : false} >{loading ? <ButtonLoader /> : 'SUBMIT FOR REVIEW'} </button>
+            <button type="submit" style={{ width: '100%' }} className="btn btn-danger mt-4" disabled={loading ? true : false} >{loading ? <ButtonLoader /> : 'SUBMIT FOR REVIEW'} </button>
             {/* <input type="submit" value="SUBMIT FOR REVIEW" className='btn-danger' /> */}
         </form>
     )

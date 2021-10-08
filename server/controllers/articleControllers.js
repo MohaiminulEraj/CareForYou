@@ -99,22 +99,23 @@ const newArticle = catchAsyncErrors(async (req, res, next) => {
             req.body.remedies_file = remedies_fileLinks;
         }
         req.body.author = req.user._id
-        req.body.diagnosis = req.body.diagnosis.split(',');
-        req.body.symptoms = req.body.symptoms.split(',');
-        for (var i = 0; i < req.body.diagnosis.length; i++) {
-            req.body.diagnosis[i] = req.body.diagnosis[i].trim();
-        }
-        for (var i = 0; i < req.body.symptoms.length; i++) {
-            req.body.symptoms[i] = req.body.symptoms[i].trim();
-        }
+        // req.body.diagnosis = req.body.diagnosis.split(',');
+        // req.body.symptoms = req.body.symptoms.split(',');
+        // for (var i = 0; i < req.body.diagnosis.length; i++) {
+        //     req.body.diagnosis[i] = req.body.diagnosis[i].trim();
+        // }
+        // for (var i = 0; i < req.body.symptoms.length; i++) {
+        //     req.body.symptoms[i] = req.body.symptoms[i].trim();
+        // }
         const article = await Article.create(req.body);
         const user = await User.findById(req.user._id).populate({
             path: 'articles',
             select: 'title department'
-        }).sort({ "createdAt": -1 }).populate({
-            path: 'author',
-            select: 'username'
-        });
+        })
+        // .populate({
+        //     path: 'author',
+        //     select: 'username'
+        // });
         user.articles.push(article)
         await user.save();
         res.status(200).json({

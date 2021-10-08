@@ -24,7 +24,7 @@ const ProfileNavbar = () => {
                     <Navbar expand="lg">
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="me-auto" activeKey={location.pathname}>
+                            {/*    <Nav className="me-auto" activeKey={location.pathname}>
                                 {user && user.role === 'doctor' && (
                                     <Nav.Link href="/me"><FaHome /></Nav.Link>)
                                 }
@@ -32,8 +32,7 @@ const ProfileNavbar = () => {
                                     <NavDropdown.Item href="/me/publications/pending-articles">Pending Articles</NavDropdown.Item>
                                     <NavDropdown.Item href="/me/publications/approved-articles">Approved Articles</NavDropdown.Item>
                                     <NavDropdown.Item href="/me/publications/revised-articles">Revised Articles</NavDropdown.Item>
-                                    {/* <NavDropdown.Divider />
-                                    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
+
                                 </NavDropdown>
                                 <Nav.Link href="/me/diagnosticReports">
                                     <a>DIAGNOSTIC REPORTS</a>
@@ -43,33 +42,41 @@ const ProfileNavbar = () => {
                                     <Nav.Link href="/me/checkup">CHECK UP</Nav.Link>)
                                 }
                                 <Nav.Link href="/me/consultant">CONSULTANT</Nav.Link>
+                            </Nav> */}
+
+                            <Nav>
+                                {user && user.role === 'doctor' && (
+                                    <Link href='/me/'>
+                                        <a>
+                                            <FaHome />
+                                        </a>
+                                    </Link>
+                                )}
+                                <Link href='/me/publications/pending-articles'>
+                                    <a>
+                                        PENDING ARTICLE
+                                    </a>
+                                </Link>
+                                <Link href='/me/publications/approved-articles'>
+                                    <a>
+                                        APPROVED ARTICLE
+                                    </a>
+                                </Link>
+                                <Link href='/me/publications/revised-articles'>
+                                    <a>
+                                        REVISE ARTICLE
+                                    </a>
+                                </Link>
+                                {user && user.role === 'doctor' && (
+                                    <Link href="/me/checkup">CHECK UP</Link>)
+                                }
+                                <Link href='/me/consultant'>
+                                    <a>
+                                        MEET DOCTOR
+                                    </a>
+                                </Link>
                             </Nav>
                         </Navbar.Collapse>
-                        {/* <Link href='/me/'>
-                            <a>
-                                <FaHome />
-                            </a>
-                        </Link>
-                        <Link href='/me/publications'>
-                            <a>
-                                PUBLICATIONS
-                            </a>
-                        </Link>
-                        <Link href='/me/diagnosticReports'>
-                            <a>
-                                DIAGNOSTIC REPORTS
-                            </a>
-                        </Link>
-                        <Link href='/me/prescriptions'>
-                            <a>
-                                PRESCRIPTION
-                            </a>
-                        </Link>
-                        <Link href='/me/consultant'>
-                            <a>
-                                CONSULTANT
-                            </a>
-                        </Link> */}
                     </Navbar>
                 </div>
             </header>

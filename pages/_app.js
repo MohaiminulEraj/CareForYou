@@ -1,9 +1,16 @@
+import React, { useEffect } from 'react'
 import Head from "next/head";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@/styles/globals.css'
 import { wrapper } from '../redux/store'
+import dbConnect from '@/config/dbConnect'
 
 function MyApp({ Component, pageProps }) {
+
+  // useEffect(() => {
+  //   dbConnect()
+  // }, [])
+
   return (
     <>
       <Head>

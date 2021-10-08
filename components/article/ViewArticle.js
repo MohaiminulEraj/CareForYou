@@ -107,17 +107,17 @@ const ViewArticle = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (visibility !== "private") {
-            // console.log(visibility)
-            const reviewData = {
-                docFeedBack, articleId: articleId, visibility
-            }
-            console.log(reviewData)
-            dispatch(newReview(article._id, reviewData))
-        }
-        else {
-            toast.error("Please Select: Forward for revision or Approve Article");
-        }
+        // if (visibility !== "private") {
+        //     // console.log(visibility)
+        //     const reviewData = {
+        //         docFeedBack, articleId: articleId, visibility
+        //     }
+        //     console.log(reviewData)
+        //     dispatch(newReview(article._id, reviewData))
+        // }
+        // else {
+        //     toast.error("Please Select: Forward for revision or Approve Article");
+        // }
     }
 
     return (
@@ -132,10 +132,11 @@ const ViewArticle = () => {
                 <form onSubmit={handleSubmit} className={styles.form}>
                     <div className="row">
                         <div className="col-md-12 form-group">
-                            <fieldset className="chatbox">
+                            <fieldset className="my-4">
                                 <div>
                                     <strong>Symptoms</strong>
                                     <div id="symptoms">{symptoms}</div>
+                                    <strong>Description</strong>
                                     <div id="desofSym">{description}</div>
                                     <div id="symFile">{description_file}</div>
                                 </div>
