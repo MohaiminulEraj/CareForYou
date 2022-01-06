@@ -18,7 +18,7 @@ const MyProfile = () => {
                         <figure className='avatar mr-3 item-rtl'>
                             <img
                                 width="150" height="150"
-                                src={user.avatar ? user.avatar.url : "/images/default_avatar.jpg"}
+                                src={user?.avatar?.url || "/images/default_avatar.jpg"}
                                 className='rounded-circle'
                                 alt='Profile Photo'
                             />

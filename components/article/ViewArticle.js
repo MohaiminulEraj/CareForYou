@@ -66,6 +66,17 @@ const ViewArticle = () => {
 
     const articleId = router.query.id;
 
+    let articleCreatedAt = new Date(article?.createdAt || '2022-01-04T11:14:09.314Z');
+    articleCreatedAt = articleCreatedAt.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+        timeZone: 'UTC'
+    });
+
     useEffect(() => {
 
         if (article && article._id !== articleId) {
@@ -127,9 +138,9 @@ const ViewArticle = () => {
                     <h2>Title: {title}</h2>
                 </div>
                 <div><strong>Department: </strong>{department}</div>
-                <div><strong>Uploaded: </strong>{createdAt}</div>
+                <div><strong>Uploaded: </strong>{articleCreatedAt}</div>
 
-                <form onSubmit={handleSubmit} className={styles.form}>
+                <form className={styles.form}>
                     <div className="row">
                         <div className="col-md-12 form-group">
                             <fieldset className="my-4">

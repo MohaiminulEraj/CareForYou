@@ -72,25 +72,25 @@ const ReviewArticle = () => {
             dispatch(getArticleDetails(articleId))
         }
         else {
-            setAuthor(article.author)
-            setCreatedAt(article.createdAt)
-            setVisibility(article.visibility)
-            setTitle(article.title)
-            setDepartment(article.department)
-            setDescription(article.description)
-            setCauses(article.causes)
-            setStages(article.stages)
-            setConsequences(article.consequences)
-            setRemediesAndTreatments(article.remediesAndTreatments)
-            setFaq(article.faq)
-            setPrevention(article.prevention)
-            setAdverse(article.adverse)
-            setSideEffect(article.sideEffect)
-            setDiagnosis(article.diagnosis)
-            setSymptoms(article.symptoms)
-            setDocId(article.docId)
-            setRefLink(article.refLink)
-            setDocFeedBack(article.docFeedBack)
+            setAuthor(article?.author)
+            setCreatedAt(article?.createdAt)
+            setVisibility(article?.visibility)
+            setTitle(article?.title)
+            setDepartment(article?.department)
+            setDescription(article?.description)
+            setCauses(article?.causes)
+            setStages(article?.stages)
+            setConsequences(article?.consequences)
+            setRemediesAndTreatments(article?.remediesAndTreatments)
+            setFaq(article?.faq)
+            setPrevention(article?.prevention)
+            setAdverse(article?.adverse)
+            setSideEffect(article?.sideEffect)
+            setDiagnosis(article?.diagnosis)
+            setSymptoms(article?.symptoms)
+            setDocId(article?.docId)
+            setRefLink(article?.refLink)
+            setDocFeedBack(article?.docFeedBack)
         }
         if (error) {
             toast.error(error);
@@ -108,12 +108,12 @@ const ReviewArticle = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (visibility !== "private") {
-            // console.log(visibility)
             const reviewData = {
                 docFeedBack, articleId: articleId, visibility
             }
-            console.log(reviewData)
+
             dispatch(newReview(article._id, reviewData))
+            console.log(visibility)
         }
         else {
             toast.error("Please Select: Forward for revision or Approve Article");

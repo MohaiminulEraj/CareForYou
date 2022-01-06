@@ -146,14 +146,21 @@ const getSingleArticle = catchAsyncErrors(async (req, res, next) => {
 // Update Article details   =>   /api/articles/:id
 const updateArticle = catchAsyncErrors(async (req, res, next) => {
 
+
+    // const article = await Article.findByIdAndUpdate(req.params.id, req.body, {
+    //     new: true,
+    //     runValidators: true 
+    // });
     let article = await Article.findById(req.query.id);
 
     if (!article) {
         return next(new ErrorHandler('Article not found with this ID', 404))
     }
     const checkUser = await User.find({ username: req.body.docId, role: "doctor" });
-    // console.log(checkUser[0].username);
+    console.log(checkUser[0].username);
     if (checkUser.length > 0 && req.user.username !== req.body.docId || req.body.draftArticle === true) {
+
+
         const description_file = req.body.description_file;
         if (description_file) {
 
@@ -254,7 +261,9 @@ const updateArticle = catchAsyncErrors(async (req, res, next) => {
             success: true,
             article
         })
+
     } else {
+        console.log('update article route')
         return next(new ErrorHandler(`Sorry! There is no Doctor by this Username: ${req.body.docId}`, 404))
     }
 })
@@ -353,6 +362,31 @@ const createArticleReview = catchAsyncErrors(async (req, res) => {
 
 })
 
+const approveArticle = catchAsyncErrors(async (req, res, next) => {
+
+
+    // const article = await Article.findByIdAndUpdate(req.params.id, req.body, {
+    //     new: true,
+    //     runValidators: true 
+    // });
+    let article = await Article.findById(req.query.id);
+
+    if (!article) {
+        return next(new ErrorHandler('Article not found with this ID', 404))
+    }
+
+    article = await Article.findByIdAndUpdate(req.query.id, req.body, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    })
+
+    res.status(200).json({
+        success: true,
+        article
+    })
+
+})
 
 export {
     allPublishedArticles,
@@ -361,5 +395,6 @@ export {
     getSingleArticle,
     updateArticle,
     deleteArticle,
+    approveArticle,
     createArticleReview,
 }

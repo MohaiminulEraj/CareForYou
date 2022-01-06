@@ -201,13 +201,13 @@ const EditProfile = () => {
                     <div className="row mb-3">
                         <div className="col">
                             <label htmlFor="countryInfo">Father ID:</label>
-                            <input id="countryInfo" type="text" className="form-control" name="country" placeholder="Father Username"
+                            <input id="countryInfo" type="text" className="form-control" name="fatherId" placeholder="Father Username"
                             />
                         </div>
                         <div className="col">
                             <label htmlFor="cityInfo">Mother ID:</label>
-                            <input id="cityInfo" type="text" className="form-control" name="city" placeholder="Mother Username"
-                                onChange={onChange} value={city !== 'City' ? city : ''} />
+                            <input id="cityInfo" type="text" className="form-control" name="motherId" placeholder="Mother Username"
+                            />
                         </div>
                     </div>
                     <h6>Please Fill up rest of the fields if you are a Doctor:</h6>

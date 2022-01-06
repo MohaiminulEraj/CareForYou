@@ -229,7 +229,7 @@ export const newReview = (id, reviewData) => async (dispatch) => {
         }
 
         // const { data } = await axios.put(`/api/reviews`, reviewData, config)
-        const { data } = await axios.put(`/api/articles/${id}`, reviewData, config)
+        const { data } = await axios.put(`/api/articles/review/${id}`, reviewData, config)
 
         dispatch({
             type: NEW_REVIEW_SUCCESS,
