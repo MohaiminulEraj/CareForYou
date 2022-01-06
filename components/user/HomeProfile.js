@@ -75,7 +75,7 @@ const PendingArticles = () => {
             rows: []
         }
         user && articles && articles.forEach(article => {
-            if (user.username === article.docId && article.visibility === 'private') {
+            if (user.username === article.docId && article.visibility === 'private' && article.draftArticle === false) {
                 data.rows.push({
                     title: article.title,
                     // department: article.department,

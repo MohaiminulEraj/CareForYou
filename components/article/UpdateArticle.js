@@ -96,10 +96,55 @@ const UpdateArticle = () => {
         e.preventDefault();
 
         const articleData = {
-            title, department, description, description_file, causes, stages, stages_file, consequences, remediesAndTreatments, remedies_file, faq, prevention, adverse, sideEffect, diagnosis, symptoms, refLink
+            title,
+            department,
+            description,
+            description_file,
+            causes,
+            stages,
+            stages_file,
+            consequences,
+            remediesAndTreatments,
+            remedies_file,
+            faq,
+            prevention,
+            adverse,
+            sideEffect,
+            diagnosis,
+            symptoms,
+            docId,
+            draftArticle: false,
+            refLink
         }
         dispatch(updateArticle(article._id, articleData))
     }
+
+    const handleDraft = (e) => {
+
+        const articleData = {
+            title,
+            department,
+            description,
+            description_file,
+            causes,
+            stages,
+            stages_file,
+            consequences,
+            remediesAndTreatments,
+            remedies_file,
+            faq,
+            prevention,
+            adverse,
+            sideEffect,
+            diagnosis,
+            symptoms,
+            docId,
+            draftArticle: true,
+            refLink
+        }
+        dispatch(updateArticle(article._id, articleData))
+    }
+
 
     const handleInputChange = (e) => {
         // setValues({ ...values, [e.target.name]: e.target.value })
@@ -192,7 +237,7 @@ const UpdateArticle = () => {
                         <input type="text" value={user && user.username} placeholder="User ID" disabled />
                     </div>
                     <div>
-                        <input type="text" id="docId" name="docId" value={docId} onChange={(e) => setDocId(e.target.value)} placeholder="Doctor ID" disabled />
+                        <input type="text" id="docId" name="docId" value={docId} onChange={(e) => setDocId(e.target.value)} placeholder="Doctor ID" />
                     </div>
                 </div>
                 <div>
@@ -202,7 +247,12 @@ const UpdateArticle = () => {
             {/* <div style={{ marginTop: '6px' }}>
                     <input type="button" value="Save as Draft" className='btn-secondary' />
                 </div> */}
-            <button type="submit" style={{ width: '100%' }} className="btn btn-danger my-4" disabled={loading ? true : false} >{loading ? <ButtonLoader /> : 'UPDATE & SUBMIT FOR REVIEW'} </button>
+            <div className="row my-4">
+                <div className="col text-center">
+                    <button type="button" onClick={handleDraft} style={{ paddingInline: '65px' }} className="btn btn-primary mb-2 mx-2" disabled={loading ? true : false} >{loading ? <ButtonLoader /> : 'SAVE AS DRAFT'} </button>
+                    <button type="submit" className="btn btn-danger mb-2 mx-2" disabled={loading ? true : false} >{loading ? <ButtonLoader /> : 'UPDATE & SUBMIT FOR REVIEW'} </button>
+                </div>
+            </div>
             {/* <input type="submit" value="SUBMIT FOR REVIEW" className='btn-danger' /> */}
         </form>
     )

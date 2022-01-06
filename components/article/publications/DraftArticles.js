@@ -41,7 +41,7 @@ const PendingArticles = () => {
     }, [dispatch, error, isDeleted]);
 
 
-    const setArticles = () => {
+    const getDraftArticles = () => {
         const data = {
             columns: [
                 {
@@ -64,16 +64,11 @@ const PendingArticles = () => {
                 //     field: 'description',
                 //     sort: 'asc'
                 // },
-                {
-                    label: 'Visibility',
-                    field: 'visibility',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Submited To',
-                    field: 'docId',
-                    sort: 'asc'
-                },
+                // {
+                //     label: 'Visibility',
+                //     field: 'visibility',
+                //     sort: 'asc'
+                // },
                 {
                     label: 'Actions',
                     field: 'actions',
@@ -85,8 +80,8 @@ const PendingArticles = () => {
         }
         // console.log(articles)
         user && articles && articles.forEach(article => {
-            console.log(article)
-            if (user._id === article.author && article.visibility === 'private' && article.draftArticle === false) {
+            // console.log(article)
+            if (user._id === article.author && article.draftArticle === true) {
                 data.rows.push({
                     title: article.title,
                     // department: article.department,
@@ -131,11 +126,11 @@ const PendingArticles = () => {
             {loading ? <Loader /> :
                 <>
                     {/* <h3 className='my-3 text-center'>{`"${user && user.articles.length}" Articles pending for approval`}</h3> */}
-                    <h3 className='my-3 text-center'>{`Pending Articles`}</h3>
+                    <h3 className='my-3 text-center'>{`Draft Articles`}</h3>
 
 
                     <MDBDataTable
-                        data={setArticles()}
+                        data={getDraftArticles()}
                         className='px-3'
                         bordered
                         striped

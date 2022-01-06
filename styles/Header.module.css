@@ -38,6 +38,7 @@
     position: relative !important
 }
 
+
 @media (min-width: 992px) {
     .dropdown_menu .dropdown-toggle:after {
         border-top: .3em solid transparent;

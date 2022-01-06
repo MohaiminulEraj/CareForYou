@@ -14,7 +14,7 @@ const ArticleSchema = new Schema({
     },
     description: {
         type: String,
-        required: [true, 'Please enter article description']
+        // required: [true, 'Please enter article description']
     },
     description_file: [
         {
@@ -28,11 +28,11 @@ const ArticleSchema = new Schema({
     ],
     causes: {
         type: String,
-        required: true
+        // required: true
     },
     stages: {
         type: String,
-        required: true,
+        // required: true,
     },
     stages_file: [
         {
@@ -46,11 +46,11 @@ const ArticleSchema = new Schema({
     ],
     consequences: {
         type: String,
-        required: true
+        // required: true
     },
     remediesAndTreatments: {
         type: String,
-        required: true
+        // required: true
     },
     remedies_file: [
         {
@@ -64,38 +64,37 @@ const ArticleSchema = new Schema({
     ],
     faq: {
         type: String,
-        required: true
+        // required: true
     },
     prevention: {
         type: String,
-        required: true
+        // required: true
     },
     adverse: {
         type: String,
-        required: true
+        // required: true
     },
     sideEffect: {
         type: String,
-        required: true
+        // required: true
     },
     diagnosis: {
         type: [String],
         trim: true,
-        required: true
+        // required: true
     },
     symptoms: {
         type: [String],
         trim: true,
-        required: true
+        // required: true
     },
     docId: {
         type: String,
         trim: true,
-        required: true
+        // required: true
     },
     refLink: {
-        type: String,
-        required: true
+        type: String
     },
     thumbnail: String,
     ratings: {
@@ -145,6 +144,10 @@ const ArticleSchema = new Schema({
         type: String,
         enum: ["public", "private", "protected"],
         default: "private"
+    },
+    draftArticle: {
+        type: Boolean,
+        default: false
     },
     createdAt: {
         type: Date,

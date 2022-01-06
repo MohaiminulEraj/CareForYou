@@ -70,6 +70,8 @@ const updateProfile = catchAsyncErrors(async (req, res, next) => {
     }
     //Update avatar
     if (req.body.avatar !== '') {
+        // console.log(req.body.avatar)
+        console.log(user.avatar)
         const image_id = user.avatar.public_id;
         // Delete user previous image/avatar
         if (image_id !== undefined) await cloudinary.v2.uploader.destroy(image_id);

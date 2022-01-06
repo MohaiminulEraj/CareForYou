@@ -40,7 +40,7 @@ const allArticles = catchAsyncErrors(async (req, res) => {
 const newArticle = catchAsyncErrors(async (req, res, next) => {
     const checkUser = await User.find({ username: req.body.docId, role: "doctor" });
     // console.log(checkUser[0].username);
-    if (checkUser.length > 0 && req.user.username !== req.body.docId) {
+    if (checkUser.length > 0 && req.user.username !== req.body.docId || req.body.draftArticle === true) {
         const description_file = req.body.description_file;
         if (description_file) {
             let description_fileLinks = [];
@@ -144,115 +144,119 @@ const getSingleArticle = catchAsyncErrors(async (req, res, next) => {
 
 
 // Update Article details   =>   /api/articles/:id
-const updateArticle = catchAsyncErrors(async (req, res) => {
+const updateArticle = catchAsyncErrors(async (req, res, next) => {
 
     let article = await Article.findById(req.query.id);
 
     if (!article) {
         return next(new ErrorHandler('Article not found with this ID', 404))
     }
+    const checkUser = await User.find({ username: req.body.docId, role: "doctor" });
+    // console.log(checkUser[0].username);
+    if (checkUser.length > 0 && req.user.username !== req.body.docId || req.body.draftArticle === true) {
+        const description_file = req.body.description_file;
+        if (description_file) {
 
-    const description_file = req.body.description_file;
-    if (description_file) {
+            // Delete description file associated with the article
+            for (let i = 0; i < article.description_file.length; i++) {
+                await cloudinary.v2.uploader.destroy(article.description_file[i].public_id)
+            }
 
-        // Delete description file associated with the article
-        for (let i = 0; i < article.description_file.length; i++) {
-            await cloudinary.v2.uploader.destroy(article.description_file[i].public_id)
+            let description_fileLinks = [];
+
+            for (let i = 0; i < description_file.length; i++) {
+
+                const result = await cloudinary.v2.uploader.upload(description_file[i], {
+                    folder: 'careforyou/articles/description_file',
+                });
+
+                description_fileLinks.push({
+                    public_id: result.public_id,
+                    url: result.secure_url
+                })
+            }
+            req.body.description_file = description_fileLinks;
         }
 
-        let description_fileLinks = [];
+        const stages_file = req.body.stages_file;
+        if (stages_file) {
 
-        for (let i = 0; i < description_file.length; i++) {
+            // Delete stages file associated with the article
+            for (let i = 0; i < article.stages_file.length; i++) {
+                await cloudinary.v2.uploader.destroy(article.stages_file[i].public_id)
+            }
 
-            const result = await cloudinary.v2.uploader.upload(description_file[i], {
-                folder: 'careforyou/articles/description_file',
-            });
+            let stages_fileLinks = [];
 
-            description_fileLinks.push({
-                public_id: result.public_id,
-                url: result.secure_url
-            })
+            for (let i = 0; i < stages_file.length; i++) {
+
+                const result = await cloudinary.v2.uploader.upload(stages_file[i], {
+                    folder: 'careforyou/articles/stages_file',
+                });
+
+                stages_fileLinks.push({
+                    public_id: result.public_id,
+                    url: result.secure_url
+                })
+            }
+            req.body.stages_file = stages_fileLinks;
         }
-        req.body.description_file = description_fileLinks;
+        const remedies_file = req.body.remedies_file;
+        if (remedies_file) {
+
+            // Delete remedies file associated with the article
+            for (let i = 0; i < article.remedies_file.length; i++) {
+                await cloudinary.v2.uploader.destroy(article.remedies_file[i].public_id)
+            }
+
+            let remedies_fileLinks = [];
+
+            for (let i = 0; i < remedies_file.length; i++) {
+
+                const result = await cloudinary.v2.uploader.upload(remedies_file[i], {
+                    folder: 'careforyou/articles/remedies_file',
+                });
+
+                remedies_fileLinks.push({
+                    public_id: result.public_id,
+                    url: result.secure_url
+                })
+            }
+            req.body.remedies_file = remedies_fileLinks;
+        }
+        // console.log(article.visibility)
+        // console.log(req.body.visibility)
+        if (article.visibility === 'protected') {
+            req.body.visibility = 'private';
+        }
+        // req.body.visibility = 'private';
+
+        // if (req.body.diagnosis) {
+        //     req.body.diagnosis = req.body.diagnosis.split(',');
+        //     for (var i = 0; i < req.body.diagnosis.length; i++) {
+        //         req.body.diagnosis[i] = req.body.diagnosis[i].trim();
+        //     }
+        // }
+        // if (req.body.symptoms) {
+        //     req.body.symptoms = req.body.symptoms.split(',');
+        //     for (var i = 0; i < req.body.symptoms.length; i++) {
+        //         req.body.symptoms[i] = req.body.symptoms[i].trim();
+        //     }
+        // }
+
+        article = await Article.findByIdAndUpdate(req.query.id, req.body, {
+            new: true,
+            runValidators: true,
+            useFindAndModify: false
+        })
+
+        res.status(200).json({
+            success: true,
+            article
+        })
+    } else {
+        return next(new ErrorHandler(`Sorry! There is no Doctor by this Username: ${req.body.docId}`, 404))
     }
-
-    const stages_file = req.body.stages_file;
-    if (stages_file) {
-
-        // Delete stages file associated with the article
-        for (let i = 0; i < article.stages_file.length; i++) {
-            await cloudinary.v2.uploader.destroy(article.stages_file[i].public_id)
-        }
-
-        let stages_fileLinks = [];
-
-        for (let i = 0; i < stages_file.length; i++) {
-
-            const result = await cloudinary.v2.uploader.upload(stages_file[i], {
-                folder: 'careforyou/articles/stages_file',
-            });
-
-            stages_fileLinks.push({
-                public_id: result.public_id,
-                url: result.secure_url
-            })
-        }
-        req.body.stages_file = stages_fileLinks;
-    }
-    const remedies_file = req.body.remedies_file;
-    if (remedies_file) {
-
-        // Delete remedies file associated with the article
-        for (let i = 0; i < article.remedies_file.length; i++) {
-            await cloudinary.v2.uploader.destroy(article.remedies_file[i].public_id)
-        }
-
-        let remedies_fileLinks = [];
-
-        for (let i = 0; i < remedies_file.length; i++) {
-
-            const result = await cloudinary.v2.uploader.upload(remedies_file[i], {
-                folder: 'careforyou/articles/remedies_file',
-            });
-
-            remedies_fileLinks.push({
-                public_id: result.public_id,
-                url: result.secure_url
-            })
-        }
-        req.body.remedies_file = remedies_fileLinks;
-    }
-    // console.log(article.visibility)
-    // console.log(req.body.visibility)
-    if (article.visibility === 'protected') {
-        req.body.visibility = 'private';
-    }
-    // req.body.visibility = 'private';
-
-    // if (req.body.diagnosis) {
-    //     req.body.diagnosis = req.body.diagnosis.split(',');
-    //     for (var i = 0; i < req.body.diagnosis.length; i++) {
-    //         req.body.diagnosis[i] = req.body.diagnosis[i].trim();
-    //     }
-    // }
-    // if (req.body.symptoms) {
-    //     req.body.symptoms = req.body.symptoms.split(',');
-    //     for (var i = 0; i < req.body.symptoms.length; i++) {
-    //         req.body.symptoms[i] = req.body.symptoms[i].trim();
-    //     }
-    // }
-
-    article = await Article.findByIdAndUpdate(req.query.id, req.body, {
-        new: true,
-        runValidators: true,
-        useFindAndModify: false
-    })
-
-    res.status(200).json({
-        success: true,
-        article
-    })
-
 })
 
 

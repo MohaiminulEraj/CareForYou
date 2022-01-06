@@ -31,31 +31,39 @@ const Header = () => {
                     {/* <Link href='/'>
                     <a>CARE FOR YOU</a>
                 </Link> */}
-                    <Link href='/'>
-                        <a>
-                            <FaHome />
-                        </a>
-                    </Link>
-                    {user && user.role !== 'admin' ? (
-                        <Link href='/articles/add'>
-                            <a>
-                                CREATE NEW ARTICLE
-                            </a>
-                        </Link>
-                    ) : (
-                        <Link href=''>
-                            <a onClick={checkLogin}>
-                                CREATE NEW ARTICLE
-                            </a>
-                        </Link>
-                    )}
-                    {user?.role === 'admin' && (
-                        <Link href='/admin/users/new-application'>
-                            <a>
-                                APPLICATION
-                            </a>
-                        </Link>
-                    )}
+                    <Nav className="navbar navbar-expand-md">
+                        <ul className="navbar-nav mr-auto">
+                            <li className="nav-item">
+                                <Link href='/'>
+                                    <a style={{ "fontSize": "2rem;" }}>
+                                        <FaHome />
+                                    </a>
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                {user && user.role !== 'admin' ? (
+                                    <Link href='/articles/add'>
+                                        <a>
+                                            CREATE NEW ARTICLE
+                                        </a>
+                                    </Link>
+                                ) : (
+                                    <Link href=''>
+                                        <a onClick={checkLogin}>
+                                            CREATE NEW ARTICLE
+                                        </a>
+                                    </Link>
+                                )}
+                                {user?.role === 'admin' && (
+                                    <Link href='/admin/users/new-application'>
+                                        <a>
+                                            APPLICATION
+                                        </a>
+                                    </Link>
+                                )}
+                            </li>
+                        </ul>
+                    </Nav>
 
                     {/* <Link href='/'>
                         <a>
@@ -129,14 +137,14 @@ const Header = () => {
                                 !loading && <ul className="navbar-nav mr-auto">
                                     <li className="nav-item">
                                         <Link href='/account/register'>
-                                            <a className="nav-link">
+                                            <a style={{ color: 'whitesmoke' }} className="nav-link btn-secondary btn-icon px-1 my-1">
                                                 REGISTER
                                             </a>
                                         </Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link href='/account/login'>
-                                            <a style={{ color: 'whitesmoke' }} className="nav-link btn-dark btn-icon">
+                                            <a style={{ color: 'whitesmoke' }} className="nav-link btn-dark btn-icon px-2 my-1">
                                                 <FaSignInAlt /> LOGIN
                                             </a>
                                         </Link>

@@ -24,7 +24,7 @@ const ProfileNavbar = () => {
                     <Navbar expand="lg">
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
-                            {/*    <Nav className="me-auto" activeKey={location.pathname}>
+                            {/* <Nav className="me-auto" activeKey={location.pathname}>
                                 {user && user.role === 'doctor' && (
                                     <Nav.Link href="/me"><FaHome /></Nav.Link>)
                                 }
@@ -44,7 +44,7 @@ const ProfileNavbar = () => {
                                 <Nav.Link href="/me/consultant">CONSULTANT</Nav.Link>
                             </Nav> */}
 
-                            <Nav>
+                            <Nav className="me-auto" activeKey={location.pathname}>
                                 {user && user.role === 'doctor' && (
                                     <Link href='/me/'>
                                         <a>
@@ -52,6 +52,7 @@ const ProfileNavbar = () => {
                                         </a>
                                     </Link>
                                 )}
+
                                 <Link href='/me/publications/pending-articles'>
                                     <a>
                                         PENDING ARTICLE
@@ -67,14 +68,19 @@ const ProfileNavbar = () => {
                                         REVISE ARTICLE
                                     </a>
                                 </Link>
+                                <Link href='/me/publications/draft-articles'>
+                                    <a>
+                                        DRAFT ARTICLE
+                                    </a>
+                                </Link>
                                 {user && user.role === 'doctor' && (
                                     <Link href="/me/checkup">CHECK UP</Link>)
                                 }
-                                <Link href='/me/consultant'>
+                                {/* <Link href='/me/consultant'>
                                     <a>
                                         MEET DOCTOR
                                     </a>
-                                </Link>
+                                </Link> */}
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>

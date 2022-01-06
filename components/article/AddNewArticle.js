@@ -76,10 +76,43 @@ const AddNewArticle = () => {
             symptoms,
             docId,
             refLink,
+            draftArticle: false,
             author: user?._id,
             authorUserId: user?.username,
         }
         dispatch(newArticle(articleData))
+    }
+
+    const handleDraft = (e) => {
+        toast.success('draft btn clicked!')
+        const articleData = {
+            title,
+            department,
+            description,
+            description_file,
+            causes,
+            stages,
+            stages_file,
+            consequences,
+            remediesAndTreatments,
+            remedies_file,
+            faq,
+            prevention,
+            adverse,
+            sideEffect,
+            diagnosis,
+            symptoms,
+            docId,
+            refLink,
+            draftArticle: true,
+            author: user?._id,
+            authorUserId: user?.username,
+        }
+        dispatch(newArticle(articleData))
+        // setTimeout(function () {
+        //     router.push('/me/publications/draft-articles')
+        // }, 1000)
+        // router.push('/me/publications/draft-articles')
     }
 
     const handleInputChange = (e) => {
@@ -113,67 +146,67 @@ const AddNewArticle = () => {
             <h1 className="text-center">Create Article</h1>
             <div className={styles.grid}>
                 <div>
-                    <input type="text" id="title" name="title" value={title} onChange={handleInputChange} placeholder="Enter Title..." />
+                    <input type="text" id="title" name="title" value={title} onChange={handleInputChange} placeholder="Enter Title..." required />
                 </div>
                 <div>
-                    <input type="text" id="department" name="department" value={department} onChange={handleInputChange} placeholder="Enter Department..." />
+                    <input type="text" id="department" name="department" value={department} onChange={handleInputChange} placeholder="Enter Department..." required />
                 </div>
                 <div>
-                    <textarea type="text" id="description" name="description" value={description} onChange={handleInputChange} placeholder="Enter Description"></textarea>
+                    <textarea type="text" id="description" name="description" value={description} onChange={handleInputChange} placeholder="Enter Description" required></textarea>
                 </div>
                 <div className={styles.grid}>
                     <div className={styles.files}>
                         <input type="file" name="description_file" onChange={handleInputChange} multiple />
                     </div>
                     <div>
-                        <textarea type="text" id="causes" name="causes" value={causes} onChange={handleInputChange} placeholder="Enter Causes"></textarea>
+                        <textarea type="text" id="causes" name="causes" value={causes} onChange={handleInputChange} placeholder="Enter Causes" required></textarea>
                     </div>
                 </div>
                 <div>
-                    <textarea type="text" id="stages" name="stages" value={stages} onChange={handleInputChange} placeholder="Enter Stages"></textarea>
+                    <textarea type="text" id="stages" name="stages" value={stages} onChange={handleInputChange} placeholder="Enter Stages" required></textarea>
                 </div>
                 <div className={styles.grid}>
                     <div className={styles.files}>
                         <input type="file" name="stages_file" onChange={handleInputChange} multiple />
                     </div>
                     <div>
-                        <textarea type="text" id="consequences" name="consequences" value={consequences} onChange={handleInputChange} placeholder="Enter consequences"></textarea>
+                        <textarea type="text" id="consequences" name="consequences" value={consequences} onChange={handleInputChange} placeholder="Enter consequences" required></textarea>
                     </div>
                 </div>
                 <div>
-                    <textarea type="text" id="remediesAndTreatments" name="remediesAndTreatments" value={remediesAndTreatments} onChange={handleInputChange} placeholder="Enter remedies and treatments"></textarea>
+                    <textarea type="text" id="remediesAndTreatments" name="remediesAndTreatments" value={remediesAndTreatments} onChange={handleInputChange} placeholder="Enter remedies and treatments" required></textarea>
                 </div>
                 <div className={styles.grid}>
                     <div className={styles.files}>
                         <input type="file" name="remedies_file" onChange={handleInputChange} multiple />
                     </div>
                     <div>
-                        <textarea type="text" id="faq" name="faq" value={faq} onChange={handleInputChange} placeholder="Frequently asked questions and answers"></textarea>
+                        <textarea type="text" id="faq" name="faq" value={faq} onChange={handleInputChange} placeholder="Frequently asked questions and answers" required></textarea>
                     </div>
                 </div>
                 <div>
-                    <textarea type="text" id="prevention" name="prevention" value={prevention} onChange={handleInputChange} placeholder="Enter prevention"></textarea>
+                    <textarea type="text" id="prevention" name="prevention" value={prevention} onChange={handleInputChange} placeholder="Enter prevention" required></textarea>
                 </div>
                 <div className={styles.grid}>
                     <div>
-                        <textarea type="text" id="adverse" name="adverse" value={adverse} onChange={handleInputChange} placeholder="Enter adverse"></textarea>
+                        <textarea type="text" id="adverse" name="adverse" value={adverse} onChange={handleInputChange} placeholder="Enter adverse" required></textarea>
                     </div>
                     <div>
-                        <textarea type="text" id="sideEffect" name="sideEffect" value={sideEffect} onChange={handleInputChange} placeholder="Enter medication and side effect"></textarea>
+                        <textarea type="text" id="sideEffect" name="sideEffect" value={sideEffect} onChange={handleInputChange} placeholder="Enter medication and side effect" required></textarea>
                     </div>
                 </div>
                 <div>
-                    <input type="text" id="diagnosis" name="diagnosis" value={diagnosis} onChange={handleInputChange} placeholder="Enter diagnosis..." />
+                    <input type="text" id="diagnosis" name="diagnosis" value={diagnosis} onChange={handleInputChange} placeholder="Enter diagnosis..." required />
                 </div>
                 <div>
-                    <input type="text" id="symptoms" name="symptoms" value={symptoms} onChange={handleInputChange} placeholder="Enter symptoms..." />
+                    <input type="text" id="symptoms" name="symptoms" value={symptoms} onChange={handleInputChange} placeholder="Enter symptoms..." required />
                 </div>
                 <div className={styles.grid}>
                     <div>
                         <input type="text" value={user?.username} name="authorUserId" placeholder="User ID" disabled />
                     </div>
                     <div>
-                        <input type="text" id="docId" name="docId" value={docId} onChange={handleInputChange} placeholder="Doctor ID" />
+                        <input type="text" id="docId" name="docId" value={docId} onChange={handleInputChange} placeholder="Doctor ID" required />
                     </div>
                 </div>
                 <div>
@@ -183,8 +216,13 @@ const AddNewArticle = () => {
             {/* <div style={{ marginTop: '6px' }}>
                     <input type="button" value="Save as Draft" className='btn-secondary' />
                 </div> */}
-            <button type="submit" style={{ width: '100%' }} className="btn btn-danger mt-4" disabled={loading ? true : false} >{loading ? <ButtonLoader /> : 'SUBMIT FOR REVIEW'} </button>
-            {/* <input type="submit" value="SUBMIT FOR REVIEW" className='btn-danger' /> */}
+            <div className="row my-4">
+                <div className="col text-center">
+                    <button type="button" onClick={handleDraft} style={{ paddingInline: '31px' }} className="btn btn-primary mb-2 mx-4" disabled={loading ? true : false} >{loading ? <ButtonLoader /> : 'SAVE AS DRAFT'} </button>
+                    <button type="submit" className="btn btn-danger mb-2 mx-4" disabled={loading ? true : false} >{loading ? <ButtonLoader /> : 'SUBMIT FOR REVIEW'} </button>
+                    {/* <input type="submit" value="SUBMIT FOR REVIEW" className='btn-danger' /> */}
+                </div>
+            </div>
         </form>
     )
 }

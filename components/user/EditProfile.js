@@ -72,7 +72,6 @@ const EditProfile = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-
         const userData = {
             fullname, email, password, avatar, dateofbirth, gender, city, country, zip, phone, license_no, university, dept_doc, reference_no
         }
@@ -199,6 +198,18 @@ const EditProfile = () => {
                                 onChange={onChange} value={phone} />
                         </div>
                     </div>
+                    <div className="row mb-3">
+                        <div className="col">
+                            <label htmlFor="countryInfo">Father ID:</label>
+                            <input id="countryInfo" type="text" className="form-control" name="country" placeholder="Father Username"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="cityInfo">Mother ID:</label>
+                            <input id="cityInfo" type="text" className="form-control" name="city" placeholder="Mother Username"
+                                onChange={onChange} value={city !== 'City' ? city : ''} />
+                        </div>
+                    </div>
                     <h6>Please Fill up rest of the fields if you are a Doctor:</h6>
                     <div className="row mb-3">
                         <div className="col">
@@ -229,8 +240,11 @@ const EditProfile = () => {
                             <input id="fileUpload" name="credential" type="file" className="form-control" multiple />
                         </div>
                     </div>
-
-                    <button type="submit" style={{ width: '100%' }} className="btn btn-danger" disabled={updateLoading ? true : false} >{updateLoading ? <ButtonLoader /> : 'UPDATE'} </button>
+                    <div className="row mb-4">
+                        <div className="col text-center">
+                            <button type="submit" style={{ width: '200px' }} className="btn btn-danger" disabled={updateLoading ? true : false} >{updateLoading ? <ButtonLoader /> : 'UPDATE'} </button>
+                        </div>
+                    </div>
                 </form>
             }
         </>
