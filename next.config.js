@@ -18,6 +18,6 @@ module.exports = {
     NEXTAUTH_URL: 'https://careforyou.vercel.app',
   },
   images: {
-    domain: ['res.cloudinary.com']
-  }
+    domains: ['res.cloudinary.com'],
+  },
 }

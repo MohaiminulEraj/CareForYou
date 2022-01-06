@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile, clearErrors } from '@/redux/actions/userActions'
 import { UPDATE_PROFILE_RESET } from '@/redux/constants/userConstants'
 import Link from 'next/link'
-// import Image from 'next/image'
+import Image from 'next/image'
 
 const EditProfile = () => {
     const dispatch = useDispatch()
@@ -137,12 +137,20 @@ const EditProfile = () => {
                                 <div className='d-flex'>
                                     <div>
                                         <figure className='avatar mr-3 item-rtl'>
-                                            <img
+                                            {/* <img
                                                 width="50" height="50"
                                                 src={avatarPreview}
                                                 className='rounded-circle'
                                                 alt='image'
-                                            />
+                                            /> */}
+                                            <div className="rounded-circle">
+                                                <Image
+                                                    width={50} height={50}
+                                                    src={avatarPreview}
+                                                    className='rounded-circle'
+                                                    alt='image'
+                                                />
+                                            </div>
                                         </figure>
                                     </div>
                                     <div className='custom-file mt-2'>

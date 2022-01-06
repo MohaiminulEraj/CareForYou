@@ -5,6 +5,7 @@ import Loader from '../layout/Loader'
 import { useSelector } from 'react-redux';
 import Link from 'next/link'
 import ProfileNavbar from '../layout/ProfileNavbar'
+import Image from 'next/image';
 
 const MyProfile = () => {
     const { user, loading } = useSelector(state => state.loadedUser)
@@ -16,12 +17,15 @@ const MyProfile = () => {
                 <div className="row">
                     <div className="col-md-2">
                         <figure className='avatar mr-3 item-rtl'>
-                            <img
-                                width="150" height="150"
-                                src={user?.avatar?.url || "/images/default_avatar.jpg"}
-                                className='rounded-circle'
-                                alt='Profile Photo'
-                            />
+                            <div className="rounded-circle">
+                                <Image
+                                    width={150} height={150}
+                                    src={user?.avatar?.url || "/images/default_avatar.jpg"}
+                                    className='rounded-circle'
+                                    alt='Profile Photo'
+                                />
+                            </div>
+
                         </figure>
                         <h6 className="mx-4">{user && user.fullname}</h6>
                         <Link href='/me/update'>

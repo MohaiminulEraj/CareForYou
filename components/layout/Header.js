@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from '@/redux/actions/userActions'
 import { signOut } from 'next-auth/client'
 import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap'
+import Image from 'next/image';
 
 const Header = () => {
     const checkLogin = () => {
@@ -86,7 +87,7 @@ const Header = () => {
                                 <div className="ml-4 dropdown d-line">
                                     <ul className="navbar-nav mr-auto">
                                         <li className="nav-item">
-                                            <Link href={user && user.role === 'user' ? '/me/publications/pending-articles' : '/me'}>
+                                            <Link href={user?.role === 'user' ? '/me/publications/pending-articles' : '/me'}>
                                                 {/* <a
                                             className="nav-link dropdown-toggle cursor-pointer justify-content-evenly"
                                             id="navbarDropdownMenuLink"
@@ -94,15 +95,27 @@ const Header = () => {
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
                                         > */}
+
                                                 <a className={styles.logo}>
-                                                    <img width="45" height="45" style={{ marginRight: 8, border: "1px solid black" }} src={user.avatar ? user.avatar.url : "/images/default_avatar.jpg"} alt={user && user.name} className="rounded-circle" />
-                                                    {user && user.fullname.toUpperCase()}
+                                                    {/* <img width="45" height="45" style={{ marginRight: 8, border: "1px solid black" }} src={user?.avatar?.url || "/images/default_avatar.jpg"} alt={user?.name} className="rounded-circle" /> */}
+                                                    {/* <div className="rounded-circle"> */}
+                                                    <Image width={45} height={45} style={{ marginRight: 8, border: "1px solid black" }} src={user?.avatar?.url || "/images/default_avatar.jpg"} alt={user?.name} className="rounded-circle" />
+
+                                                    {/* </div> */}
                                                 </a>
+
                                                 {/* <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                         <li><a className="dropdown-item" href="#">Action</a></li>
                                         <li><a className="dropdown-item" href="#">Another action</a></li>
                                         <li><a className="dropdown-item" href="#">Something else here</a></li>
                                     </ul> */}
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link href={user?.role === 'user' ? '/me/publications/pending-articles' : '/me'}>
+                                                <a className={styles.logo}>
+                                                    {user?.fullname.toUpperCase()}
+                                                </a>
                                             </Link>
                                         </li>
                                         {/* {user && user.role == 'doctor' && (
