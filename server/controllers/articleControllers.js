@@ -13,6 +13,7 @@ const allPublishedArticles = catchAsyncErrors(async (req, res) => {
     // const articlesCount = await Article.countDocuments({ visibility: 'public' });
 
     const apiFeatures = new APIFeatures(Article.find({ visibility: 'public' }), req.query).search()
+    // const apiFeatures = new APIFeatures(User.find({ role: 'doctor' }), req.query).search()
 
     let articles = await apiFeatures.query;
     // let filteredarticlesCount = articles.length;

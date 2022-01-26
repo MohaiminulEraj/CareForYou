@@ -36,7 +36,7 @@ const Header = () => {
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
                                 <Link href='/'>
-                                    <a style={{ "fontSize": "2rem;" }}>
+                                    <a style={{ "fontSize": "2rem" }}>
                                         <FaHome />
                                     </a>
                                 </Link>

@@ -9,9 +9,10 @@ class APIFeatures {
                 $regex: this.queryStr.location,
                 $options: 'i'
             }
-        } : {}
 
+        } : {}
         this.query = this.query.find({ ...location })
+        // console.log(location);
         return this;
     }
 }

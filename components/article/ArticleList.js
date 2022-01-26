@@ -21,8 +21,6 @@ const ArticleList = ({ article }) => {
                     <h5>{article.description.length >= 60 ? article.description.substring(0, 60) + '...' : article.description}</h5>
 
                     {/* <div className="ratings mt-auto mb-3">
-                        <p className="card-text"><b>${article.pricePerNight}</b> / night</p>
-
                         <div className="rating-outer">
                             <div
                                 className="rating-inner"
@@ -36,6 +34,27 @@ const ArticleList = ({ article }) => {
                         <Link href={`/articles/${article._id}`}>View Details</Link>
                     </button>
                 </div>
+
+                {/* <Image
+                    className="card-img-top mx-auto"
+                    src={article.avatar.url}
+                    height={270}
+                    width={100}
+                    alt="Doctors Profile Photo"
+                />
+                <div className="card-body d-flex flex-column">
+                    <h2 className="card-title">
+                        <Link href={`/articles/${article._id}`}>
+                            <a>{article.fullname}</a>
+                        </Link>
+                    </h2>
+                    <h5>{article.dept_doc}</h5>
+
+
+                    <button className="btn btn-block view-btn">
+                        <Link href={`/articles/${article._id}`}>View Proffile</Link>
+                    </button>
+                </div> */}
             </div>
         </div>
     )
