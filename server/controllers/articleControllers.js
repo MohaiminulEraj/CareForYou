@@ -3,18 +3,21 @@ import Article from '../models/article'
 import catchAsyncErrors from '../middlewares/catchAsyncErrors'
 import cloudinary from 'cloudinary'
 import APIFeatures from '../utils/apiFeatures'
+import DocAPIFeatures from '../utils/docApiFeatures'
 import ErrorHandler from '../utils/errorHandler'
-
+import colors from 'colors'
 
 // GET - all published articles=> /api/articles/published
 const allPublishedArticles = catchAsyncErrors(async (req, res) => {
     // const resPerPage = 4;
 
     // const articlesCount = await Article.countDocuments({ visibility: 'public' });
-
-    const apiFeatures = new APIFeatures(Article.find({ visibility: 'public' }), req.query).search()
-    // const apiFeatures = new APIFeatures(User.find({ role: 'doctor' }), req.query).search()
-
+    let apiFeatures = ''
+    if (req.query.articleStatus === 'true') {
+        apiFeatures = new APIFeatures(Article.find({ visibility: 'public' }), req.query).search()
+    } else {
+        apiFeatures = new DocAPIFeatures(User.find({ role: 'doctor' }), req.query).search()
+    }
     let articles = await apiFeatures.query;
     // let filteredarticlesCount = articles.length;
     // apiFeatures.pagination(resPerPage)

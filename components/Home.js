@@ -1,61 +1,61 @@
-import React, { useEffect } from 'react'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import { FaArrowLeft } from "react-icons/fa";
+// import React, { useEffect } from 'react'
+// import { useRouter } from 'next/router'
+// import Link from 'next/link'
+// import { FaArrowLeft } from "react-icons/fa";
 
-import ArticleList from './article/ArticleList'
+// import ArticleList from './article/ArticleList'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { toast } from 'react-toastify';
+// import { useDispatch, useSelector } from 'react-redux'
+// import { toast } from 'react-toastify';
 
-import { getPublishedArticles, clearErrors } from '../redux/actions/articleActions'
+// import { getPublishedArticles, clearErrors } from '../redux/actions/articleActions'
 
-const Home = () => {
+// const Home = () => {
 
-    const dispatch = useDispatch()
-    const router = useRouter()
+//     const dispatch = useDispatch()
+//     const router = useRouter()
 
-    const { articles, error } = useSelector(state => state.allPublishedArticles);
+//     const { articles, error } = useSelector(state => state.allPublishedArticles);
 
-    let { location, page = 1 } = router.query;
-    page = Number(page)
+//     let { location, page = 1 } = router.query;
+//     page = Number(page)
 
-    useEffect(() => {
-        dispatch(getPublishedArticles())
+//     useEffect(() => {
+//         dispatch(getPublishedArticles())
 
-        if (error) {
-            toast.error(error)
-            dispatch(clearErrors())
-        }
+//         if (error) {
+//             toast.error(error)
+//             dispatch(clearErrors())
+//         }
 
-    }, [dispatch, error])
+//     }, [dispatch, error])
 
 
-    return (
-        <>
-            <section id="articles" className="container mt-5">
+//     return (
+//         <>
+//             <section id="articles" className="container mt-5">
 
-                <h2 className='mb-3 ml-2 stays-heading'>{location ? `Search Result of ${location}` : 'All Articles'}</h2>
+//                 <h2 className='mb-3 ml-2 stays-heading'>{location ? `Search Result of ${location}` : 'All Articles'}</h2>
 
-                <Link href='/' >
-                    <a className='ml-2 back-to-search'>
-                        <FaArrowLeft className="mb-1" /> Back to Search
-                    </a>
-                </Link>
+//                 <Link href='/' >
+//                     <a className='ml-2 back-to-search'>
+//                         <FaArrowLeft className="mb-1" /> Back to Search
+//                     </a>
+//                 </Link>
 
-                <div className="row">
-                    {articles && articles.length === 0 ?
-                        <div className="alert alert-danger mt-5 w-100"><b>No articles.</b></div>
-                        :
-                        articles && articles.map(article => (
-                            <ArticleList key={article._id} article={article} />
-                        ))
-                    }
-                </div>
-            </section>
+//                 <div className="row">
+//                     {articles && articles.length === 0 ?
+//                         <div className="alert alert-danger mt-5 w-100"><b>No articles.</b></div>
+//                         :
+//                         articles && articles.map(article => (
+//                             <ArticleList key={article._id} article={article} />
+//                         ))
+//                     }
+//                 </div>
+//             </section>
 
-        </>
-    )
-}
+//         </>
+//     )
+// }
 
-export default Home
+// export default Home
