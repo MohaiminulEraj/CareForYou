@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import colors from 'colors';
 
-const conn = process.env.DB_LOCAL_URI;
-// const conn = process.env.DB_URI;
+// const conn = process.env.DB_LOCAL_URI;
+const conn = process.env.DB_URI;
 const dbConnect = async () => {
     try {
         await mongoose.connect(conn, {
