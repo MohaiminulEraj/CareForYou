@@ -4,14 +4,18 @@ class APIFeatures {
         this.queryStr = queryStr;
     }
     search() {
-        const location = this.queryStr.location ? {
-            title: {
-                $regex: this.queryStr.location,
-                $options: 'i'
-            }
+        let regex = new RegExp(this.queryStr.location, 'i');
+        // { $and: [ { $or: [{title: regex },{description: regex}] }, {category: value.category}, {city:value.city} ] }
+        // const location = this.queryStr.location ? {
+        //     // $and: [{ $or: [{ title: regex }, { description: regex }] }, { symptoms: value.symptoms }, { diagnosis: value.diagnosis }]
+        //     title: {
+        //         $regex: this.queryStr.location,
+        //         $options: 'i'
+        //     }
 
-        } : {}
-        this.query = this.query.find({ ...location })
+        // } : {}
+        // this.query = this.query.find({ ...location })
+        this.query = this.query.find().or([{ 'title': { $regex: regex } }, { 'description': { $regex: regex } }, { 'symptoms': { $regex: regex } }])
         // console.log(location);
         return this;
     }
