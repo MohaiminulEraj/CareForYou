@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 // import { useRouter } from 'next/router'
 // import dbConnect from '@/config/dbConnect'
-// import { FaSearch } from 'react-icons/fa'
+import { FaFileMedical, FaUserMd } from 'react-icons/fa'
 import SearchResults from './SearchResults'
 import styles from '@/styles/Search.module.css'
 import axios from 'axios';
@@ -24,7 +24,8 @@ export default function Search() {
         }
 
         getResults()
-    }, [searchTerm])
+    }, [searchTerm, articleStatus, docStatus])
+
     const handleSubmit = (e) => {
         e.preventDefault();
     }
@@ -39,11 +40,13 @@ export default function Search() {
             setArticleStatus(false);
         }
         setSearchTerm('');
+        console.log('checkRadio btn clicked')
     }
     return (
         <div className="container">
-            <input type="radio" id="searchArticle" onClick={checkRadio} value="article" name="type" checked={articleStatus} /> <label htmlFor="searchArticle">Article</label> <br />
-            <input type="radio" id="searchDoc" onClick={checkRadio} value="doctor" name="type" checked={docStatus} /> <label htmlFor="searchDoc">Doctor</label>
+            <input type="radio" id="searchArticle" onChange={checkRadio} value="article" name="type" checked={articleStatus} /> <label className="mb-2" htmlFor="searchArticle"> <FaFileMedical icon="spinner" size={40} /> </label> <br />
+            <input type="radio" id="searchDoc" onChange={checkRadio} value="doctor" name="type" checked={docStatus} /> <label className="mb-2" htmlFor="searchDoc"> <FaUserMd size={40} /></label>
+            <br />
             <div className={styles.search}>
 
                 <form onSubmit={handleSubmit}>

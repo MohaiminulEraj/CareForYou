@@ -5,9 +5,7 @@ import dbConnect from '@/config/dbConnect'
 
 export default NextAuth({
     session: {
-        jwt: {
-            signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
-        }
+        jwt: true
     },
     providers: [
         Providers.Credentials({

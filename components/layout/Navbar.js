@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FaTimes, FaBars, FaHome, FaCaretDown } from 'react-icons/fa'
-import { ButtonLoader } from './ButtonLoader';
-// import { Link } from 'react-router-dom';
+// import { ButtonLoader } from './ButtonLoader';
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux';
 import '@/styles/Navbar.module.css';
@@ -46,7 +45,7 @@ const Navbar = () => {
                         <li className='nav-item'>
                             <Link href='/'>
                                 <a className='nav-links' onClick={closeMobileMenu}>
-                                    <FaHome />
+                                    <FaHome size={35} />
                                 </a>
                             </Link>
                         </li>
