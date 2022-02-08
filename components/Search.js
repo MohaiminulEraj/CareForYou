@@ -18,29 +18,28 @@ export default function Search() {
             if (searchTerm === '') {
                 setSearchResults([])
             } else {
-                const res = await axios.get(`/api/articles/published?location=${searchTerm}&articleStatus=${articleStatus}&docStatus=${docStatus}`)
+                const res = await axios.get(`/api/articles/published?location=${searchTerm}&articleStatus=${articleStatus}`)
                 setSearchResults(res.data.articles)
             }
         }
 
         getResults()
-    }, [searchTerm, articleStatus, docStatus])
+    }, [searchTerm, articleStatus])
 
     const handleSubmit = (e) => {
         e.preventDefault();
     }
     const checkRadio = (e) => {
         if (e.target.value === 'article') {
-            setPlaceholder('Search Articles...')
+            setPlaceholder('Articles...')
             setArticleStatus(true);
             setDocStatus(false);
         } else {
-            setPlaceholder('Search Doctors...')
+            setPlaceholder('Doctors...')
             setDocStatus(true);
             setArticleStatus(false);
         }
         setSearchTerm('');
-        console.log('checkRadio btn clicked')
     }
     return (
         <div className="container">
@@ -50,7 +49,7 @@ export default function Search() {
             <div className={styles.search}>
 
                 <form onSubmit={handleSubmit}>
-                    <input type="text" name="" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder={placeholder} />
+                    <input type="text" name="" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder={`Search ${placeholder}`} />
                 </form>
                 <SearchResults val={searchTerm} results={searchResults} />
 
