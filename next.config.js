@@ -18,6 +18,6 @@ module.exports = {
   //   NEXTAUTH_URL: '',
   // },
   images: {
-    domains: ['res.cloudinary.com'],
+    domains: ['res.cloudinary.com', 'gravatar.com'],
   },
 }

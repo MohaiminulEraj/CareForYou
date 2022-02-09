@@ -4,7 +4,8 @@ import dbConnect from '@/config/dbConnect'
 import ErrorHandler from '../utils/errorHandler'
 import catchAsyncErrors from '../middlewares/catchAsyncErrors'
 import sendEmail from '../utils/sendEmail'
-
+import gravatar from 'gravatar'
+import normalize from 'normalize-url';
 import absoluteUrl from 'next-absolute-url'
 import crypto from 'crypto'
 
@@ -20,12 +21,23 @@ cloudinary.config({
 const registerUser = catchAsyncErrors(async (req, res) => {
 
     const { fullname, username, email, password } = req.body;
+    const avatar = {
+        url: normalize(
+            gravatar.url(email, {
+                s: '200',
+                r: 'pg',
+                d: 'mm'
+            }),
+            { forceHttps: true }
+        )
+    }
 
     const user = await User.create({
         fullname,
         username,
         email,
         password,
+        avatar
     });
 
     res.status(200).json({
