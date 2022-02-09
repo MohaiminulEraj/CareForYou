@@ -55,28 +55,28 @@ const ProfileNavbar = () => {
                                 <NavDropdown title="PUBLICATIONS" id="basic-nav-dropdown">
                                     <NavDropdown.Item>
                                         <Link href='/me/publications/pending-articles'>
-                                            <a>
+                                            <a className="my-1">
                                                 PENDING ARTICLE
                                             </a>
                                         </Link>
                                     </NavDropdown.Item>
                                     <NavDropdown.Item>
                                         <Link href='/me/publications/approved-articles'>
-                                            <a>
+                                            <a className="my-1">
                                                 APPROVED ARTICLE
                                             </a>
                                         </Link>
                                     </NavDropdown.Item>
                                     <NavDropdown.Item>
                                         <Link href='/me/publications/revised-articles'>
-                                            <a>
+                                            <a className="my-1">
                                                 REVISE ARTICLE
                                             </a>
                                         </Link>
                                     </NavDropdown.Item>
                                     <NavDropdown.Item>
                                         <Link href='/me/publications/draft-articles'>
-                                            <a>
+                                            <a className="my-1">
                                                 DRAFT ARTICLE
                                             </a>
                                         </Link>
@@ -87,7 +87,7 @@ const ProfileNavbar = () => {
                                         <a className="mt-2">CHECK UP</a>
                                     </Link>)
                                 }
-                                {/* <Link href="/me/diagnosticReports">
+                                {/* <Link href="/me/diagnostic-reports">
                                     <a className="mt-2">DIAGNOSTIC REPORTS</a>
                                 </Link>
                                 <Link href="/me/prescriptions">

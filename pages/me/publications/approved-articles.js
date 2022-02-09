@@ -1,15 +1,15 @@
 import React from 'react'
-import MyProfile from '@/components/user/MyProfile'
+// import MyProfile from '@/components/user/MyProfile'
 import ApprovedArticle from '@/components/article/publications/ApprovedArticle'
-import Layout from '@/components/layout/Layout'
+import ProfileLayout from '@/components/layout/ProfileLayout'
 import { getSession } from 'next-auth/client'
 
 const approvedArticles = () => {
     return (
-        <Layout title="Approved Articles">
-            <MyProfile />
+        <ProfileLayout title="Approved Articles">
+            {/* <MyProfile /> */}
             <ApprovedArticle />
-        </Layout>
+        </ProfileLayout>
     )
 }
 

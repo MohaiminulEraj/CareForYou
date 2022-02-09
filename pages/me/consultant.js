@@ -1,13 +1,12 @@
 import React from 'react'
-import MyProfile from '@/components/user/MyProfile'
-import Layout from '@/components/layout/Layout'
+import ProfileLayout from '@/components/layout/ProfileLayout'
 import { getSession } from 'next-auth/client'
 
 const myProfilePage = () => {
     return (
-        <Layout title="Consultant">
-            <MyProfile />
-        </Layout>
+        <ProfileLayout title="Consultant">
+            <h2>Consultant</h2>
+        </ProfileLayout>
     )
 }
 
