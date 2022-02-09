@@ -11,7 +11,7 @@ export default function Search() {
     const [searchResults, setSearchResults] = useState([])
     const [articleStatus, setArticleStatus] = useState(true);
     const [docStatus, setDocStatus] = useState(false);
-    const [placeholder, setPlaceholder] = useState('Search Articles...');
+    const [placeholder, setPlaceholder] = useState('Articles...');
 
     useEffect(() => {
         const getResults = async () => {
