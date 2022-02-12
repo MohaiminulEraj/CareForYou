@@ -43,8 +43,8 @@ export default function Search() {
     }
     return (
         <div className="container">
-            <input type="radio" id="searchArticle" onChange={checkRadio} value="article" name="type" checked={articleStatus} /> <label className="mb-2" htmlFor="searchArticle"> <FaFileMedical icon="spinner" size={40} /> </label> <br />
-            <input type="radio" id="searchDoc" onChange={checkRadio} value="doctor" name="type" checked={docStatus} /> <label className="mb-2" htmlFor="searchDoc"> <FaUserMd size={40} /></label>
+            <input type="radio" id="searchArticle" onChange={checkRadio} value="article" name="type" checked={articleStatus} style={{ display: 'none' }} /> <label className="mb-2" htmlFor="searchArticle"> <FaFileMedical style={{ color: articleStatus && 'red' }} icon="spinner" size={45} /> </label>
+            <input type="radio" id="searchDoc" onChange={checkRadio} value="doctor" name="type" checked={docStatus} style={{ display: 'none' }} /> <label className="mb-2" htmlFor="searchDoc"> <FaUserMd style={{ color: docStatus && 'red' }} size={45} /></label>
             <br />
             <div className={styles.search}>
 
