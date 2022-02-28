@@ -4,7 +4,7 @@ import ArticleList from './article/ArticleList'
 export default function SearchResults({ val, results }) {
 
     return (
-        <section id="articles" className="container mt-5">
+        <section id="articles" className="container mt-0">
 
             <div className="row">
                 {val?.length !== 0 && results?.length === 0 ?

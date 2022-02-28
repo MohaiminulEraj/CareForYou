@@ -28,7 +28,7 @@ export default function Search() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    }
+    };
     const checkRadio = (e) => {
         if (e.target.value === 'article') {
             setPlaceholder('Articles...')
@@ -40,16 +40,22 @@ export default function Search() {
             setArticleStatus(false);
         }
         setSearchTerm('');
-    }
+    };
+
+    const onClick = (e) => {
+        document.getElementById("search_elem").style.position = 'relative';
+        document.getElementById("search_elem").style.top = '-144px';
+    };
+
     return (
-        <div className="container">
+        <div className='container' id="search_elem">
             <input type="radio" id="searchArticle" onChange={checkRadio} value="article" name="type" checked={articleStatus} style={{ display: 'none' }} /> <label className="mb-2 cursor-pointer" htmlFor="searchArticle"> <FaFileMedical style={{ color: articleStatus && 'red' }} icon="spinner" size={45} role="button" /> </label>
             <input type="radio" id="searchDoc" onChange={checkRadio} value="doctor" name="type" checked={docStatus} style={{ display: 'none' }} /> <label className="mb-2" htmlFor="searchDoc"> <FaUserMd style={{ color: docStatus && 'red' }} size={45} role="button" /></label>
             <br />
             <div className={styles.search}>
 
                 <form onSubmit={handleSubmit}>
-                    <input type="text" name="" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder={`Search ${placeholder}`} />
+                    <input type="text" name="" onClick={onClick} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder={`Search ${placeholder}`} />
                 </form>
                 <SearchResults val={searchTerm} results={searchResults} />
 

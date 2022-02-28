@@ -7,6 +7,11 @@
     border-radius: 5px;
 }
 
+.page_elements {
+    position: relative;
+    top: -144px;
+}
+
 @media only screen and (max-width: 600px) {
     .search input {
         width: 80%;
