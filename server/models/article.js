@@ -10,7 +10,7 @@ const ArticleSchema = new Schema({
     },
     department: {
         type: String,
-        required: [true, 'Please enter a department name']
+        // required: [true, 'Please enter a department name']
     },
     description: {
         type: String,

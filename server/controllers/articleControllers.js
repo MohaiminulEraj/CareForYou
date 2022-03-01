@@ -114,7 +114,7 @@ const newArticle = catchAsyncErrors(async (req, res, next) => {
         const article = await Article.create(req.body);
         const user = await User.findById(req.user._id).populate({
             path: 'articles',
-            select: 'title department'
+            select: 'title'
         })
         // .populate({
         //     path: 'author',
@@ -162,7 +162,7 @@ const updateArticle = catchAsyncErrors(async (req, res, next) => {
     }
     const checkUser = await User.find({ username: req.body.docId, role: "doctor" });
     console.log(checkUser[0].username);
-    if (checkUser.length > 0 && req.user.username !== req.body.docId || req.body.draftArticle === true) {
+    if (checkUser.length > 0 && req.user.username !== req.body.docId || req.body.draftArticle === true) {draftArticle
 
 
         const description_file = req.body.description_file;

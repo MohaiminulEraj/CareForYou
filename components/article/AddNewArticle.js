@@ -84,7 +84,6 @@ const AddNewArticle = () => {
     }
 
     const handleDraft = (e) => {
-        toast.success('draft btn clicked!')
         const articleData = {
             title,
             department,
@@ -109,6 +108,7 @@ const AddNewArticle = () => {
             authorUserId: user?.username,
         }
         dispatch(newArticle(articleData))
+        toast.success('Article Saved to Draft!')
         // setTimeout(function () {
         //     router.push('/me/publications/draft-articles')
         // }, 1000)
