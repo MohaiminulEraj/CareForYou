@@ -20,7 +20,7 @@ export default function Layout({ title, description, keywords, children }) {
 }
 
 Layout.defaultProps = {
-    title: 'Care For You',
+    title: 'Doctors24',
     description: 'A website that provides verified articles to stop fake news from spreading and a platform where patients can set appointments and talk to specialists to diagnose their health problems.',
-    keywords: 'health, care, online medication, care for you'
+    keywords: 'doctors24, health, care, online medication, care for you'
 }
