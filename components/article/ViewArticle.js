@@ -67,7 +67,7 @@ const ViewArticle = () => {
     const articleId = router.query.id;
 
     let articleCreatedAt = new Date(article?.createdAt || '2022-01-04T11:14:09.314Z');
-    articleCreatedAt = articleCreatedAt.toLocaleDateString('en-US', {
+    articleCreatedAt = articleCreatedAt?.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -83,25 +83,25 @@ const ViewArticle = () => {
             dispatch(getArticleDetails(articleId))
         }
         else {
-            setAuthorUserId(article.authorUserId)
-            setCreatedAt(article.createdAt)
-            setVisibility(article.visibility)
-            setTitle(article.title)
-            setDepartment(article.department)
-            setDescription(article.description)
-            setCauses(article.causes)
-            setStages(article.stages)
-            setConsequences(article.consequences)
-            setRemediesAndTreatments(article.remediesAndTreatments)
-            setFaq(article.faq)
-            setPrevention(article.prevention)
-            setAdverse(article.adverse)
-            setSideEffect(article.sideEffect)
-            setDiagnosis(article.diagnosis)
-            setSymptoms(article.symptoms)
-            setDocId(article.docId)
-            setRefLink(article.refLink)
-            setDocFeedBack(article.docFeedBack)
+            setAuthorUserId(article?.authorUserId)
+            setCreatedAt(article?.createdAt)
+            setVisibility(article?.visibility)
+            setTitle(article?.title)
+            setDepartment(article?.department)
+            setDescription(article?.description)
+            setCauses(article?.causes)
+            setStages(article?.stages)
+            setConsequences(article?.consequences)
+            setRemediesAndTreatments(article?.remediesAndTreatments)
+            setFaq(article?.faq)
+            setPrevention(article?.prevention)
+            setAdverse(article?.adverse)
+            setSideEffect(article?.sideEffect)
+            setDiagnosis(article?.diagnosis)
+            setSymptoms(article?.symptoms)
+            setDocId(article?.docId)
+            setRefLink(article?.refLink)
+            setDocFeedBack(article?.docFeedBack)
         }
         if (error) {
             toast.error(error);
