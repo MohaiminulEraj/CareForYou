@@ -4,7 +4,7 @@ import colors from 'colors';
 const conn = process.env.DB_URI;
 const dbConnect = async () => {
     try {
-        await mongoose.connect("mongodb://localhost/doctors24", {
+        await mongoose.connect(conn, {
             useNewUrlParser: true,
             // strictPopulate: false,
             // useCreateIndex: true,
