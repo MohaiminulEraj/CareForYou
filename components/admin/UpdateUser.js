@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 
 import { updateUser, getUserDetails, clearErrors } from '@/redux/actions/userActions'
 import { UPDATE_USER_RESET } from '@/redux/constants/userConstants'
+import Image from 'next/image';
 
 const UpdateUser = () => {
 
@@ -87,6 +88,20 @@ const UpdateUser = () => {
                             <h3 style={{ textAlign: 'center' }}>Update User Info:</h3>
                         </div>
                     </div>
+                    <figure className='avatar mr-3 item-rtl'>
+                            <div
+                                className="rounded-circle"
+                                style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+                            >
+                                <Image
+                                    width={150} height={150}
+                                    src={user?.avatar?.url || "/images/default_avatar.jpg"}
+                                    className='rounded-circle'
+                                    alt='Profile Photo'
+                                />
+                            </div>
+
+                    </figure>
                     <div className="row mb-3">
                         <div className="col">
                             <label htmlFor="UserName">Username: </label>

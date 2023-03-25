@@ -10,7 +10,8 @@ const handler = nc({ onError });
 
 dbConnect();
 
-handler.use(isAuthenticatedUser, authorizeRoles('admin')).get(getUserDetails)
+// handler.use(isAuthenticatedUser, authorizeRoles('admin')).get(getUserDetails)
+handler.get(getUserDetails)
 handler.use(isAuthenticatedUser, authorizeRoles('admin')).put(updateUser)
 handler.use(isAuthenticatedUser, authorizeRoles('admin')).delete(deleteUser)
 
