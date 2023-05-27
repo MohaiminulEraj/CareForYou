@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import Head from "next/head";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
+import "mdbreact/dist/css/mdb.css";
 import '@/styles/globals.css'
 import { wrapper } from '../redux/store'
 // import dbConnect from '@/config/dbConnect'
